@@ -101,7 +101,7 @@ mark{background:linear-gradient(transparent 58%, rgba(255,210,95,.75) 58%);color
 .dots button[aria-current="true"]{background:var(--gold);border-color:var(--gold);transform:scale(1.25)}
 .dots button span{position:absolute;right:22px;top:50%;transform:translateY(-50%);white-space:nowrap;background:var(--deep);color:var(--on-dark);font-family:var(--f-mono);font-size:.7rem;padding:4px 8px;border-radius:4px;opacity:0;pointer-events:none;transition:opacity .2s}
 .dots button:hover span,.dots button:focus-visible span{opacity:1}
-.controls{position:fixed;right:max(16px,3vw);bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:20;display:flex;align-items:center;gap:8px;
+.controls{position:relative;display:flex;align-items:center;gap:8px;
   background:rgba(0,42,64,.82);backdrop-filter:blur(8px);border:1px solid var(--line-dark);border-radius:999px;padding:6px;color:var(--on-dark)}
 .controls button{all:unset;cursor:pointer;display:grid;place-items:center;width:38px;height:38px;border-radius:50%;transition:background .2s}
 .controls button:hover{background:rgba(255,255,255,.12)}
@@ -385,15 +385,14 @@ mark{background:linear-gradient(transparent 58%, rgba(255,210,95,.75) 58%);color
 <body>
 <div class="progress" id="progress"></div>
 <header class="topbar">
-  <div class="brand"><b>N</b><span>Neuropedagogía</span></div>
-</header>
-<nav class="dots" id="dots" aria-label="Diapositivas"></nav>
-<div class="controls" aria-label="Controles de la presentación">
+  <div class="controls" aria-label="Controles de la presentación">
   <button type="button" id="prev" aria-label="Diapositiva anterior"><svg viewBox="0 0 24 24"><path d="M18 15l-6-6-6 6"/></svg></button>
   <span class="counter" id="counter" aria-live="polite">01 / 16</span>
   <button type="button" id="next" aria-label="Diapositiva siguiente"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
   <button type="button" id="fs" aria-label="Pantalla completa"><svg viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
 </div>
+</header>
+<nav class="dots" id="dots" aria-label="Diapositivas"></nav>
 <div class="hint" id="hint">Usa ↑ ↓, la rueda del ratón o los puntos laterales</div>
 
 <main class="deck" id="deck" tabindex="0">
