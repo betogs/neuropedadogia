@@ -1,0 +1,1036 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Presentación interactiva sobre conceptos, importancia, principios y métodos didácticos de la neuropedagogía para el aprendizaje autónomo.">
+<style>body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Neuropedagogía y aprendizaje autónomo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: una sola página de diapositivas a pantalla completa con desplazamiento por secciones (scroll-snap),
+   fondos en capas con parallax y elementos que entran y salen al cambiar de diapositiva.
+   Paleta institucional UNAD: azul profundo, azul medio y amarillo. Look único y deliberado (no cambia con el tema). */
+:root{
+  --navy:#004669; --deep:#002a40; --blue:#3366CC; --sky:#9ec0ff; --gold:#FFD25F; --gold-deep:#e8b72c;
+  --paper:#F1F5F8; --ink:#0b2433; --ink-soft:#44606f; --on-dark:#ffffff; --on-dark-soft:#bcd0dc;
+  --line-dark:rgba(255,255,255,.16); --line-light:rgba(0,70,105,.16);
+  --f-display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body:"Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif;
+  --f-mono:"IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+  --s-hero:clamp(2.6rem, 7vw, 5.6rem); --s-h2:clamp(1.9rem, 4.2vw, 3.3rem); --s-h3:clamp(1.1rem, 1.6vw, 1.35rem);
+  --s-body:clamp(1rem, 1.25vw, 1.15rem); --s-small:.85rem;
+  color-scheme:light;
+}
+html,body{height:100%}
+body{background:var(--deep);color:var(--on-dark);font-family:var(--f-body);font-size:var(--s-body);line-height:1.55;overflow:hidden}
+*{box-sizing:border-box}
+h1,h2,h3{font-family:var(--f-display);line-height:1.05;margin:0;text-wrap:balance}
+p{margin:0}
+.deck{height:100%;overflow-y:auto;overflow-x:hidden;scroll-snap-type:y mandatory;scroll-behavior:smooth;outline:none}
+.slide{position:relative;min-height:100%;scroll-snap-align:start;overflow:hidden;display:flex;align-items:center;
+  padding-block:clamp(72px,9vh,110px);padding-inline:max(20px, 6vw)}
+.slide > .wrap{position:relative;z-index:2;width:100%;max-width:1180px;margin-inline:auto;display:grid;gap:clamp(20px,3vh,36px)}
+.dark{background:var(--navy);color:var(--on-dark)}
+.deep{background:var(--deep);color:var(--on-dark)}
+.light{background:var(--paper);color:var(--ink)}
+.gold{background:var(--gold);color:var(--ink)}
+.eyebrow{font-family:var(--f-mono);font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;display:flex;gap:12px;align-items:center}
+.dark .eyebrow,.deep .eyebrow{color:var(--gold)}
+.light .eyebrow{color:var(--blue)}
+.gold .eyebrow{color:var(--navy)}
+.eyebrow::before{content:"";width:28px;height:2px;background:currentColor}
+h2{font-size:var(--s-h2);font-weight:800;letter-spacing:-.01em}
+.lead{font-size:clamp(1.05rem,1.6vw,1.3rem);max-width:62ch}
+.dark .lead,.deep .lead{color:var(--on-dark-soft)}
+.light .lead{color:var(--ink-soft)}
+.cite{font-family:var(--f-mono);font-size:.78rem;opacity:.8}
+.hl{color:var(--gold)}
+.light .hl{color:var(--blue)}
+mark{background:linear-gradient(transparent 58%, rgba(255,210,95,.75) 58%);color:inherit;padding:0 .1em}
+
+/* ---------- Fondos parallax ---------- */
+.bg{position:absolute;inset:-25% 0;z-index:0;pointer-events:none}
+.layer{position:absolute;inset:0;will-change:transform}
+.orb{position:absolute;border-radius:50%;filter:blur(2px)}
+.dark .orb.a,.deep .orb.a{background:radial-gradient(circle at 35% 35%, rgba(51,102,204,.75), rgba(51,102,204,0) 70%)}
+.dark .orb.b,.deep .orb.b{background:radial-gradient(circle, rgba(255,210,95,.32), rgba(255,210,95,0) 68%)}
+.light .orb.a{background:radial-gradient(circle, rgba(51,102,204,.16), rgba(51,102,204,0) 70%)}
+.light .orb.b{background:radial-gradient(circle, rgba(255,210,95,.45), rgba(255,210,95,0) 68%)}
+.gold .orb.a{background:radial-gradient(circle, rgba(255,255,255,.5), rgba(255,255,255,0) 70%)}
+.gold .orb.b{background:radial-gradient(circle, rgba(0,70,105,.18), rgba(0,70,105,0) 68%)}
+.net{width:100%;height:100%}
+.net line{stroke-width:1}
+.dark .net line,.deep .net line{stroke:rgba(158,192,255,.22)}
+.dark .net circle,.deep .net circle{fill:rgba(255,210,95,.55)}
+.light .net line{stroke:rgba(0,70,105,.12)}
+.light .net circle{fill:rgba(51,102,204,.35)}
+.gold .net line{stroke:rgba(0,70,105,.16)}
+.gold .net circle{fill:rgba(0,70,105,.35)}
+.grid-dots{background-image:radial-gradient(currentColor 1px, transparent 1.2px);background-size:26px 26px;opacity:.09}
+.bignum{position:absolute;inset:auto;right:4vw;bottom:14%;font-family:var(--f-display);font-weight:800;font-size:clamp(9rem,26vw,22rem);line-height:.8;opacity:.07;letter-spacing:-.04em}
+
+/* ---------- Animación de entrada / salida ---------- */
+.anim [data-a]{transition:opacity .7s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1);transition-delay:calc(var(--d,0) * 90ms)}
+.anim .slide:not(.is-in) [data-a]{opacity:0;transition-delay:0ms;transition-duration:.35s}
+.anim .slide:not(.is-in) [data-a="up"]{transform:translateY(46px)}
+.anim .slide:not(.is-in) [data-a="down"]{transform:translateY(-40px)}
+.anim .slide:not(.is-in) [data-a="left"]{transform:translateX(-60px)}
+.anim .slide:not(.is-in) [data-a="right"]{transform:translateX(60px)}
+.anim .slide:not(.is-in) [data-a="zoom"]{transform:scale(.86)}
+.anim .slide:not(.is-in) [data-a="fade"]{transform:none}
+@media (prefers-reduced-motion: reduce){
+  .deck{scroll-behavior:auto}
+  .anim [data-a]{transition:none!important;opacity:1!important;transform:none!important}
+  .layer{transform:none!important}
+}
+
+/* ---------- Navegación ---------- */
+.topbar{position:fixed;left:0;right:0;top:0;z-index:20;display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:calc(12px + env(safe-area-inset-top,0px)) max(16px,3vw) 12px;pointer-events:none;font-family:var(--f-mono);font-size:.75rem;letter-spacing:.1em;text-transform:uppercase}
+.topbar > *{pointer-events:auto}
+.brand{display:flex;align-items:center;gap:10px;color:var(--on-dark);background:rgba(0,42,64,.82);backdrop-filter:blur(8px);border:1px solid var(--line-dark);border-radius:999px;padding:4px 14px 4px 4px}
+.brand b{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--gold);color:var(--deep);font-family:var(--f-display);font-size:.8rem}
+.progress{position:fixed;left:0;top:0;height:4px;width:0;background:var(--gold);z-index:21;transition:width .4s}
+.dots{position:fixed;right:max(12px,1.6vw);top:50%;transform:translateY(-50%);z-index:20;display:flex;flex-direction:column;gap:9px}
+.dots button{all:unset;cursor:pointer;width:11px;height:11px;border-radius:50%;border:2px solid rgba(188,208,220,.8);background:rgba(0,42,64,.35);position:relative;transition:transform .25s, background .25s}
+.dots button:hover,.dots button:focus-visible{transform:scale(1.35)}
+.dots button:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.dots button[aria-current="true"]{background:var(--gold);border-color:var(--gold);transform:scale(1.25)}
+.dots button span{position:absolute;right:22px;top:50%;transform:translateY(-50%);white-space:nowrap;background:var(--deep);color:var(--on-dark);font-family:var(--f-mono);font-size:.7rem;padding:4px 8px;border-radius:4px;opacity:0;pointer-events:none;transition:opacity .2s}
+.dots button:hover span,.dots button:focus-visible span{opacity:1}
+.controls{position:fixed;right:max(16px,3vw);bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:20;display:flex;align-items:center;gap:8px;
+  background:rgba(0,42,64,.82);backdrop-filter:blur(8px);border:1px solid var(--line-dark);border-radius:999px;padding:6px;color:var(--on-dark)}
+.controls button{all:unset;cursor:pointer;display:grid;place-items:center;width:38px;height:38px;border-radius:50%;transition:background .2s}
+.controls button:hover{background:rgba(255,255,255,.12)}
+.controls button:focus-visible{outline:2px solid var(--gold)}
+.controls svg{width:18px;height:18px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.counter{font-family:var(--f-mono);font-size:.8rem;min-width:62px;text-align:center;font-variant-numeric:tabular-nums}
+.hint{position:fixed;left:50%;transform:translateX(-50%);white-space:nowrap;bottom:calc(22px + env(safe-area-inset-bottom,0px));z-index:20;font-family:var(--f-mono);font-size:.7rem;letter-spacing:.08em;color:var(--on-dark-soft);background:rgba(0,42,64,.7);padding:6px 10px;border-radius:6px;transition:opacity .6s}
+.hint.gone{opacity:0}
+
+/* ---------- Portada ---------- */
+.cover h1{font-size:clamp(1.25rem,2.1vw,1.7rem);font-weight:600;letter-spacing:0;color:var(--on-dark-soft)}
+.cover .wrap > *{max-width:min(100%,640px)}
+.cover h1 em{font-style:normal;color:inherit}
+.cover .cover-big{font-family:var(--f-display);font-weight:800;font-size:clamp(1.9rem,3.7vw,2.5rem);line-height:1.08;letter-spacing:-.02em;color:var(--on-dark);text-wrap:balance}
+.cover .cover-big .after{font-weight:400}
+.cover .cover-big em{font-style:normal;color:var(--gold)}
+.cover .wrap > .cover-big{max-width:min(100%,680px)}
+.cover .meta{display:flex;flex-wrap:wrap;gap:10px}
+.chip{font-family:var(--f-mono);font-size:.78rem;padding:7px 12px;border-radius:999px;border:1px solid var(--line-dark);color:var(--on-dark-soft)}
+.light .chip{border-color:var(--line-light);color:var(--ink-soft)}
+.cover .brain{position:absolute;right:max(6vw, calc((100% - 1180px) / 2));top:50%;width:min(36vw,480px);transform:translateY(-50%);z-index:1;opacity:.95}
+.scrollcue{display:flex;align-items:center;gap:10px;font-family:var(--f-mono);font-size:.75rem;color:var(--on-dark-soft);letter-spacing:.1em;text-transform:uppercase}
+.scrollcue i{width:22px;height:34px;border:2px solid currentColor;border-radius:12px;position:relative}
+.scrollcue i::after{content:"";position:absolute;left:50%;top:6px;width:4px;height:7px;margin-left:-2px;border-radius:2px;background:var(--gold);animation:cue 1.6s infinite}
+@keyframes cue{0%{transform:translateY(0);opacity:1}80%{transform:translateY(12px);opacity:0}100%{opacity:0}}
+
+/* ---------- Ruta (escalera) ---------- */
+.stairs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;align-items:end}
+.step{border-radius:14px;padding:22px 20px;display:grid;gap:8px;align-content:start;min-width:0}
+.step .q{font-family:var(--f-mono);font-size:.78rem;letter-spacing:.06em}
+.step h3{font-size:clamp(1.3rem,2vw,1.7rem)}
+.step p{font-size:.95rem}
+.step:nth-child(1){min-height:170px;background:#fff;color:var(--ink);border:1px solid var(--line-light)}
+.step:nth-child(2){min-height:220px;background:var(--sky);color:var(--deep)}
+.step:nth-child(3){min-height:270px;background:var(--blue);color:#fff}
+.step:nth-child(4){min-height:320px;background:var(--navy);color:#fff}
+.step:nth-child(4) .q{color:var(--gold)}
+
+/* ---------- Diagramas SVG genéricos ---------- */
+.fig{width:100%;overflow-x:auto}
+.fig svg{display:block;width:100%;height:auto}
+.two{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:clamp(24px,4vw,64px);align-items:center}
+.two > *{min-width:0}
+.venn text{font-family:var(--f-display);font-weight:600}
+.defbox{border-left:4px solid var(--gold);padding:6px 0 6px 20px;display:grid;gap:12px}
+.defbox p{font-size:clamp(1.1rem,1.7vw,1.4rem);line-height:1.45}
+
+/* ---------- Mapa conceptual ---------- */
+.cmap .node rect{rx:12}
+#cmap{max-height:62vh}
+.cmap text{font-family:var(--f-body)}
+.cmap .lbl{font-family:var(--f-mono);font-size:12px;fill:var(--ink-soft)}
+.cmap .node{cursor:default;transition:opacity .3s}
+.cmap.focus .node:not(.on), .cmap.focus .edge:not(.on){opacity:.22}
+.cmap .edge{transition:opacity .3s}
+.cmap .tip{font-size:13px}
+.cmap-note{font-family:var(--f-mono);font-size:.75rem;color:var(--ink-soft)}
+.defs-strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.defs-strip div{background:#fff;border:1px solid var(--line-light);border-radius:10px;padding:14px 16px;font-size:.92rem;color:var(--ink)}
+.defs-strip b{font-family:var(--f-display);display:block;margin-bottom:4px;color:var(--navy)}
+
+/* ---------- Tarjetas de importancia ---------- */
+.cards5{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:14px}
+.card{background:rgba(255,255,255,.55);border:1px solid rgba(0,70,105,.18);border-radius:14px;padding:20px 18px;display:grid;gap:10px;align-content:start;min-width:0}
+.card .ic{width:46px;height:46px;border-radius:12px;background:var(--navy);display:grid;place-items:center}
+.card .ic svg{width:26px;height:26px;stroke:var(--gold);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.card h3{font-size:1.1rem;color:var(--deep)}
+.card p{font-size:.92rem;color:var(--ink)}
+.card .cite{color:var(--navy)}
+
+/* ---------- Neuromitos (tarjetas que giran) ---------- */
+.flips{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.flip{all:unset;cursor:pointer;perspective:1000px;min-height:250px;display:block}
+.flip:focus-visible .face{outline:3px solid var(--gold);outline-offset:3px}
+.flip .inner{position:relative;width:100%;height:100%;min-height:250px;transition:transform .7s cubic-bezier(.3,.7,.2,1);transform-style:preserve-3d}
+.flip.flipped .inner{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;border-radius:16px;padding:24px;display:grid;gap:12px;align-content:space-between}
+.face.front{background:rgba(255,255,255,.06);border:1px dashed rgba(255,210,95,.6);color:var(--on-dark)}
+.face.back{background:var(--gold);color:var(--ink);transform:rotateY(180deg)}
+.face .tag{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase}
+.face.front .tag{color:var(--gold)}
+.face.back .tag{color:var(--navy)}
+.face h3{font-size:clamp(1.15rem,1.7vw,1.4rem)}
+.face p{font-size:.95rem}
+.face .turn{font-family:var(--f-mono);font-size:.72rem;opacity:.75}
+
+/* ---------- Pilares ---------- */
+.temple{display:grid;gap:10px}
+.roof{background:var(--gold);color:var(--ink);clip-path:polygon(4% 100%,50% 0,96% 100%);padding:34px 0 16px;text-align:center;font-family:var(--f-display);font-weight:800;font-size:clamp(1.1rem,2vw,1.5rem)}
+.cols{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.col{background:rgba(255,255,255,.07);border:1px solid var(--line-dark);border-radius:10px;padding:18px 16px;display:grid;gap:8px;align-content:start;min-height:180px;min-width:0}
+.col h3{font-size:1.1rem;color:var(--gold)}
+.col p{font-size:.9rem;color:var(--on-dark-soft)}
+.base{border-top:3px solid var(--gold);padding-top:10px;font-family:var(--f-mono);font-size:.78rem;color:var(--on-dark-soft);text-align:center}
+
+/* ---------- Principios ---------- */
+.pgrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.pcard{all:unset;cursor:pointer;box-sizing:border-box;border-radius:14px;padding:18px;background:#fff;border:1px solid var(--line-light);display:grid;gap:8px;align-content:start;min-height:150px;color:var(--ink);transition:transform .25s, box-shadow .25s, background .25s;min-width:0}
+.pcard:hover{transform:translateY(-4px);box-shadow:0 12px 26px rgba(0,42,64,.12)}
+.pcard:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.pcard .n{font-family:var(--f-display);font-weight:800;font-size:2rem;color:var(--blue);line-height:1}
+.pcard h3{font-size:1rem;line-height:1.25}
+.pcard .imp{font-size:.88rem;color:var(--ink-soft);display:none}
+.pcard[aria-expanded="true"]{background:var(--navy);color:#fff;border-color:var(--navy)}
+.pcard[aria-expanded="true"] .n{color:var(--gold)}
+.pcard[aria-expanded="true"] .imp{display:block;color:var(--on-dark-soft)}
+.pcard[aria-expanded="true"] .imp b{color:var(--gold)}
+.pcard .more{font-family:var(--f-mono);font-size:.7rem;color:var(--blue)}
+.pcard[aria-expanded="true"] .more{display:none}
+
+/* ---------- Métodos (pestañas) ---------- */
+.mtabs{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:24px;align-items:start}
+.mlist{display:grid;gap:6px}
+.mlist button{all:unset;cursor:pointer;box-sizing:border-box;display:flex;gap:12px;align-items:center;padding:10px 14px;border-radius:10px;color:var(--on-dark-soft);font-size:.95rem;transition:background .2s,color .2s}
+.mlist button b{font-family:var(--f-mono);font-size:.8rem;color:var(--gold);min-width:20px}
+.mlist button:hover{background:rgba(255,255,255,.08);color:#fff}
+.mlist button:focus-visible{outline:2px solid var(--gold)}
+.mlist button[aria-selected="true"]{background:var(--gold);color:var(--ink)}
+.mlist button[aria-selected="true"] b{color:var(--navy)}
+.mpanel{background:rgba(255,255,255,.06);border:1px solid var(--line-dark);border-radius:18px;padding:clamp(20px,3vw,36px);display:grid;gap:20px;min-height:360px}
+.mpanel h3{font-size:clamp(1.5rem,2.6vw,2.2rem);color:#fff}
+.mpanel .cols2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px}
+.mpanel h4{margin:0 0 6px;font-family:var(--f-mono);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);font-weight:500}
+.mpanel p{color:var(--on-dark-soft);font-size:.98rem}
+.mpanel .ex{display:flex;flex-wrap:wrap;gap:8px}
+.mpanel .ex span{font-size:.82rem;padding:6px 10px;border-radius:999px;background:rgba(158,192,255,.16);color:#fff}
+.mpanel.swap{animation:swap .45s cubic-bezier(.2,.7,.2,1)}
+@keyframes swap{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+/* ---------- Puente principios-métodos ---------- */
+.bridge{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(40px,12vw,180px)}
+.bridge ul{list-style:none;margin:0;padding:0;display:grid;gap:8px;position:relative;z-index:1}
+.bridge li button{all:unset;box-sizing:border-box;cursor:pointer;display:block;width:100%;padding:9px 14px;border-radius:10px;background:#fff;border:1px solid var(--line-light);font-size:.92rem;color:var(--ink);transition:background .25s,color .25s,opacity .25s,border-color .25s}
+.bridge li button:focus-visible{outline:2px solid var(--blue)}
+.bridge .mcol button{cursor:default}
+.bridge li b{font-family:var(--f-mono);font-size:.78rem;color:var(--blue);margin-right:8px}
+.bridge.sel li button{opacity:.38}
+.bridge.sel li button.on{opacity:1;background:var(--navy);color:#fff;border-color:var(--navy)}
+.bridge.sel li button.on b{color:var(--gold)}
+.bridge .colhead{font-family:var(--f-mono);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin-bottom:4px}
+.bridge svg.wires{position:absolute;inset:0;width:100%;height:100%;z-index:0;overflow:visible;pointer-events:none}
+.wires path{fill:none;stroke:rgba(51,102,204,.22);stroke-width:1.5;transition:stroke .3s, stroke-width .3s}
+.wires path.on{stroke:var(--gold-deep);stroke-width:3}
+.bridge-ex{min-height:3.2em;background:#fff;border-left:4px solid var(--gold);border-radius:6px;padding:12px 16px;color:var(--ink);font-size:.98rem}
+.bridge-ex b{color:var(--navy)}
+
+/* ---------- Infografía repaso ---------- */
+.ig{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:clamp(20px,4vw,56px);align-items:center}
+.ig > *{min-width:0}
+.week{display:grid;gap:10px}
+.week .row{display:grid;grid-template-columns:84px minmax(0,1fr);gap:12px;align-items:center}
+.week .day{font-family:var(--f-mono);font-size:.8rem;color:var(--navy);font-weight:500}
+.week .bar{border-radius:8px;padding:9px 12px;font-size:.9rem;color:var(--ink);background:#fff;border:1px solid rgba(0,70,105,.18)}
+.week .bar.k{background:var(--navy);color:#fff;border-color:var(--navy)}
+.week .bar.r{background:var(--blue);color:#fff;border-color:var(--blue)}
+.legend{display:flex;flex-wrap:wrap;gap:14px;font-family:var(--f-mono);font-size:.74rem;color:var(--ink)}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+
+/* ---------- IA ---------- */
+.ai{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.ai .use{display:grid;grid-template-columns:52px minmax(0,1fr);gap:14px;align-items:start;padding:18px;border-radius:14px;background:rgba(255,255,255,.06);border:1px solid var(--line-dark)}
+.ai .use .ic{width:52px;height:52px;border-radius:14px;background:var(--blue);display:grid;place-items:center}
+.ai .use .ic svg{width:28px;height:28px;stroke:#fff;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.ai .use h3{font-size:1.08rem;margin-bottom:4px}
+.ai .use p{font-size:.92rem;color:var(--on-dark-soft)}
+.caution{border:1px solid var(--gold);border-radius:14px;padding:18px 20px;display:grid;gap:8px}
+.caution h3{font-size:1.05rem;color:var(--gold)}
+.caution ul{margin:0;padding-left:1.1em;display:grid;gap:4px;color:var(--on-dark-soft);font-size:.95rem}
+
+/* ---------- Conclusiones ---------- */
+.concl{display:grid;gap:14px;counter-reset:c}
+.concl li{list-style:none;display:grid;grid-template-columns:56px minmax(0,1fr);gap:16px;align-items:start;padding-bottom:14px;border-bottom:1px solid rgba(0,70,105,.2);font-size:clamp(1rem,1.5vw,1.2rem)}
+.concl li::before{counter-increment:c;content:counter(c, decimal-leading-zero);font-family:var(--f-display);font-weight:800;font-size:2rem;line-height:1;color:var(--navy)}
+.concl{padding:0;margin:0}
+.quote{font-family:var(--f-display);font-weight:600;font-size:clamp(1.3rem,2.4vw,2rem);line-height:1.25;max-width:30ch;color:var(--deep)}
+
+/* ---------- Referencias y equipo ---------- */
+.refs{columns:2 320px;column-gap:32px;font-size:.82rem;color:var(--on-dark-soft)}
+.refs p{break-inside:avoid;margin:0 0 10px;padding-left:1.6em;text-indent:-1.6em;overflow-wrap:anywhere}
+.refs i{color:#fff}
+.team{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+.team div{border:1px solid var(--line-dark);border-left:3px solid var(--gold);border-radius:10px;padding:12px 14px;display:flex;align-items:center;min-width:0}
+.team p{font-family:var(--f-display);font-weight:600;font-size:.98rem;line-height:1.25;color:var(--on-dark);overflow-wrap:anywhere}
+.team span{font-family:var(--f-mono);font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold)}
+.team [contenteditable]{font-size:.95rem;outline:none;border-bottom:1px dashed rgba(188,208,220,.4);min-height:1.4em;overflow-wrap:anywhere}
+.team [contenteditable]:focus{border-bottom-color:var(--gold)}
+.team [contenteditable]:empty::before{content:attr(data-ph);color:rgba(188,208,220,.55)}
+
+/* ---------- Entrada de los elementos del fondo ---------- */
+.anim .slide .orb{transition:opacity 1.4s ease, scale 1.8s cubic-bezier(.2,.7,.2,1)}
+.anim .slide:not(.is-in) .orb{opacity:0;scale:.35;transition-duration:.5s,.5s}
+.anim .slide .orb.b{transition-delay:.25s}
+.anim .slide .net line{stroke-dasharray:1;stroke-dashoffset:0;transition:stroke-dashoffset 1.6s cubic-bezier(.3,.6,.2,1);transition-delay:calc(var(--i,0) * 35ms + .2s)}
+.anim .slide:not(.is-in) .net line{stroke-dashoffset:1;transition-duration:.4s;transition-delay:0s}
+.anim .slide .net circle{transform-box:fill-box;transform-origin:center;transition:scale .6s cubic-bezier(.3,1.6,.4,1), opacity .6s;transition-delay:calc(var(--i,0) * 40ms + .5s)}
+.anim .slide:not(.is-in) .net circle{scale:0;opacity:0;transition-duration:.3s;transition-delay:0s}
+.anim .slide .bignum{transition:opacity 1.2s ease .4s, translate 1.4s cubic-bezier(.2,.7,.2,1) .4s}
+.anim .slide:not(.is-in) .bignum{opacity:0;translate:0 120px;transition-duration:.4s;transition-delay:0s}
+.anim .slide .grid-dots{transition:opacity 1.2s ease .1s}
+.anim .slide:not(.is-in) .grid-dots{opacity:0;transition-duration:.4s;transition-delay:0s}
+@media (prefers-reduced-motion: reduce){
+  .anim .slide .orb,.anim .slide .net line,.anim .slide .net circle,.anim .slide .bignum,.anim .slide .grid-dots{transition:none!important}
+  .anim .slide:not(.is-in) .orb,.anim .slide:not(.is-in) .net circle{opacity:1;scale:1}
+  .anim .slide:not(.is-in) .net line{stroke-dashoffset:0}
+  .anim .slide:not(.is-in) .bignum{opacity:.07;translate:none}
+  .anim .slide:not(.is-in) .grid-dots{opacity:.09}
+}
+
+/* ---------- Péndulo cíclico de los elementos del fondo ---------- */
+@keyframes pend{from{rotate:calc(var(--sw) * -1)}to{rotate:var(--sw)}}
+.orb,.net,.bignum,.grid-dots{animation:pend var(--dur,10s) ease-in-out infinite alternate;animation-delay:var(--dl,0s)}
+.orb{transform-origin:50% -80%}
+.orb.a{--sw:4deg;--dur:9s}
+.orb.b{--sw:6deg;--dur:7s;--dl:-3s;transform-origin:50% -120%}
+.net{--sw:1.2deg;--dur:12s;--dl:-5s;transform-origin:50% 0}
+.bignum{--sw:3deg;--dur:8s;--dl:-2s;transform-origin:50% -150%}
+.grid-dots{--sw:.6deg;--dur:14s;transform-origin:50% 0}
+.slide:nth-child(even) .orb.a{--dl:-4s;--dur:10s}
+.slide:nth-child(3n) .net{--dl:-8s;--dur:11s}
+@media (prefers-reduced-motion: reduce){.orb,.net,.bignum,.grid-dots{animation:none}}
+
+/* ---------- Efectos hover ---------- */
+.anim .slide .hov{transition-property:opacity,transform,translate,scale,box-shadow,background-color,border-color,color;
+  transition-duration:.7s,.8s,.35s,.35s,.35s,.35s,.35s,.35s;
+  transition-delay:calc(var(--d,0) * 90ms),calc(var(--d,0) * 90ms),0s,0s,0s,0s,0s,0s;
+  transition-timing-function:cubic-bezier(.2,.7,.2,1)}
+.anim .slide:not(.is-in) .hov{transition-delay:0s;transition-duration:.35s}
+.step,.card,.col,.use,.caution,.concl li,.roof{cursor:default}
+.step:hover{translate:0 -10px;box-shadow:0 18px 34px rgba(0,42,64,.22)}
+.step:nth-child(1):hover{border-color:var(--blue)}
+.card .ic{transition:transform .35s cubic-bezier(.2,.7,.2,1), background-color .35s}
+.card:hover{translate:0 -8px;background-color:#fff;box-shadow:0 16px 30px rgba(0,42,64,.18);border-color:var(--navy)}
+.card:hover .ic{transform:rotate(-8deg) scale(1.12);background-color:var(--blue)}
+.roof:hover{scale:1.02}
+.col:hover{translate:0 -8px;background-color:rgba(255,255,255,.14);border-color:var(--gold);box-shadow:0 14px 28px rgba(0,0,0,.25)}
+.use .ic{transition:transform .35s cubic-bezier(.2,.7,.2,1), background-color .35s}
+.use .ic svg{transition:stroke .35s}
+.use:hover{translate:6px 0;background-color:rgba(255,255,255,.12);border-color:var(--gold)}
+.use:hover .ic{background-color:var(--gold);transform:scale(1.08)}
+.use:hover .ic svg{stroke:var(--deep)}
+.caution:hover{background-color:rgba(255,210,95,.12);scale:1.01}
+.concl li::before{transition:color .3s, transform .35s}
+.concl li:hover{translate:10px 0;border-color:var(--navy)}
+.concl li:hover::before{color:var(--blue);transform:scale(1.15)}
+.cnode,.ccore{transform-box:fill-box;transform-origin:center;transition:transform .35s cubic-bezier(.2,.7,.2,1);cursor:default}
+.cnode rect,.cnode text,.ccore circle{transition:fill .3s, stroke .3s}
+.cnode:hover,.ccore:hover{transform:scale(1.1)}
+.cnode:hover rect{fill:#FFD25F;stroke:#e8b72c}
+.cnode:hover text{fill:#0b2433}
+.ccore:hover circle{stroke:#FFD25F;stroke-width:3}
+@media (prefers-reduced-motion: reduce){.hov,.cnode,.ccore{translate:none!important;scale:none!important}}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1000px){
+  .cards5{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .pgrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .team{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cover .brain{opacity:.28;width:80vw;right:-20vw}
+}
+@media (max-width: 760px){
+  .deck{scroll-snap-type:y proximity}
+  .slide{padding-inline:20px}
+  .two,.ig,.mtabs,.bridge,.ai,.mpanel .cols2{grid-template-columns:minmax(0,1fr)}
+  .stairs,.cols{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .step{min-height:0!important}
+  .flips{grid-template-columns:minmax(0,1fr)}
+  .flip,.flip .inner{min-height:210px}
+  .bridge{gap:18px}
+  .bridge svg.wires{display:none}
+  .dots{display:none}
+  .mlist{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .fig.wide svg{min-width:640px}
+  .hint{display:none}
+}
+@media (max-width: 460px){
+  .cards5,.pgrid,.team{grid-template-columns:minmax(0,1fr)}
+  .controls .counter{min-width:48px}
+}
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<header class="topbar">
+  <div class="brand"><b>N</b><span>Neuropedagogía</span></div>
+</header>
+<nav class="dots" id="dots" aria-label="Diapositivas"></nav>
+<div class="controls" aria-label="Controles de la presentación">
+  <button type="button" id="prev" aria-label="Diapositiva anterior"><svg viewBox="0 0 24 24"><path d="M18 15l-6-6-6 6"/></svg></button>
+  <span class="counter" id="counter" aria-live="polite">01 / 16</span>
+  <button type="button" id="next" aria-label="Diapositiva siguiente"><svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button>
+  <button type="button" id="fs" aria-label="Pantalla completa"><svg viewBox="0 0 24 24"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg></button>
+</div>
+<div class="hint" id="hint">Usa ↑ ↓, la rueda del ratón o los puntos laterales</div>
+
+<main class="deck" id="deck" tabindex="0">
+
+<!-- 01 PORTADA -->
+<section class="slide deep cover is-in" data-title="Portada">
+  <div class="bg" aria-hidden="true">
+    <div class="layer" data-speed="0.35"><div class="orb a" style="width:70vw;height:70vw;left:-25vw;top:10%"></div><div class="orb b" style="width:40vw;height:40vw;right:5vw;top:45%"></div></div>
+    <div class="layer" data-speed="0.15"><svg class="net" data-net="54" data-seed="3" preserveAspectRatio="none"></svg></div>
+  </div>
+  <svg class="brain" viewBox="0 0 400 400" aria-hidden="true" data-a="zoom" style="--d:3">
+    <defs><radialGradient id="glow" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#FFD25F" stop-opacity=".55"/><stop offset="1" stop-color="#FFD25F" stop-opacity="0"/></radialGradient></defs>
+    <circle cx="200" cy="200" r="190" fill="url(#glow)"/>
+    <g fill="none" stroke="#9ec0ff" stroke-width="2" stroke-linecap="round" opacity=".9">
+      <path d="M200 70c-38-30-104-14-112 36-40 6-56 56-28 86-20 34 4 80 46 80 10 38 64 52 94 22"/>
+      <path d="M200 70c38-30 104-14 112 36 40 6 56 56 28 86 20 34-4 80-46 80-10 38-64 52-94 22"/>
+      <path d="M200 70v224"/>
+      <path d="M124 128c22 6 34 22 34 44M118 206c26-6 50 6 58 30M276 128c-22 6-34 22-34 44M282 206c-26-6-50 6-58 30"/>
+    </g>
+    <g fill="#FFD25F"><circle cx="158" cy="172" r="6"/><circle cx="176" cy="236" r="6"/><circle cx="242" cy="172" r="6"/><circle cx="224" cy="236" r="6"/><circle cx="200" cy="130" r="7"/><circle cx="124" cy="128" r="5"/><circle cx="276" cy="128" r="5"/></g>
+    <g stroke="#FFD25F" stroke-width="1.5" fill="none" opacity=".75"><path d="M158 172L200 130L242 172M176 236L200 130L224 236M158 172L176 236M242 172L224 236"/></g>
+  </svg>
+  <div class="wrap">
+    <p class="eyebrow" data-a="down">Fase 2 · Estructuración · Trabajo colaborativo, paso 3</p>
+    <h1 data-a="up" style="--d:1">Neuropedagogía para el <em>aprendizaje autónomo</em></h1>
+    <p class="cover-big" data-a="up" style="--d:2">Conceptos, importancia, principios y métodos didácticos: <span class="after"><em>cómo aprende el cerebro</em> y qué puede hacer el estudiante con ese conocimiento.</span></p>
+    <div class="meta" data-a="up" style="--d:3">
+      <span class="chip">Curso 503408699</span><span class="chip">Escuela de Ciencias de la Educación · ECEDU</span><span class="chip">Universidad Nacional Abierta y a Distancia</span>
+    </div>
+    <div class="scrollcue" data-a="fade" style="--d:5"><i></i>Desplázate para comenzar</div>
+  </div>
+</section>
+
+<!-- 02 RUTA -->
+<section class="slide light" data-title="Ruta de la presentación">
+  <div class="bg" aria-hidden="true">
+    <div class="layer grid-dots" data-speed="0.12" style="color:var(--navy)"></div>
+    <div class="layer" data-speed="0.3"><div class="orb b" style="width:46vw;height:46vw;right:-12vw;top:5%"></div></div>
+  </div>
+  <div class="wrap">
+    <p class="eyebrow" data-a="down">Ruta</p>
+    <h2 data-a="up" style="--d:1">Cuatro niveles, cuatro preguntas</h2>
+    <p class="lead" data-a="up" style="--d:2">Cada nivel se apoya en el anterior: primero definimos, luego justificamos, después explicamos cómo aprende el cerebro y por último lo llevamos a la práctica.</p>
+    <div class="stairs">
+      <div class="step hov" data-a="up" style="--d:2"><span class="q">¿Qué es?</span><h3>Conceptos</h3><p>Los términos clave: neuroplasticidad, atención, memoria, metacognición…</p></div>
+      <div class="step hov" data-a="up" style="--d:3"><span class="q">¿Para qué sirve?</span><h3>Importancia</h3><p>Por qué el estudiante autónomo necesita saber cómo aprende su cerebro.</p></div>
+      <div class="step hov" data-a="up" style="--d:4"><span class="q">¿Cómo aprende el cerebro?</span><h3>Principios</h3><p>Enunciados basados en evidencia. Son el <b>porqué</b>.</p></div>
+      <div class="step hov" data-a="up" style="--d:5"><span class="q">¿Qué hago en la práctica?</span><h3>Métodos didácticos</h3><p>Procedimientos concretos que aplican los principios. Son el <b>cómo</b>.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 NEUROPEDAGOGÍA -->
+<section class="slide dark" data-title="¿Qué es la neuropedagogía?">
+  <div class="bg" aria-hidden="true">
+    <div class="layer" data-speed="0.3"><div class="orb a" style="width:60vw;height:60vw;right:-20vw;top:0"></div></div>
+    <div class="layer" data-speed="0.12"><svg class="net" data-net="34" data-seed="11" preserveAspectRatio="none"></svg></div>
+    <div class="layer bignum" data-speed="0.45">01</div>
+  </div>
+  <div class="wrap two">
+    <div style="display:grid;gap:22px">
+      <p class="eyebrow" data-a="down">Concepto central</p>
+      <h2 data-a="left" style="--d:1">¿Qué es la neuropedagogía?</h2>
+      <div class="defbox" data-a="left" style="--d:2">
+        <p>Un campo <mark style="color:#fff">interdisciplinario</mark> que integra las neurociencias, la psicología cognitiva y la pedagogía para comprender cómo aprende el cerebro y orientar con ese conocimiento la práctica educativa.</p>
+        <span class="cite">Araya-Pizarro &amp; Espinoza Pastén (2020)</span>
+      </div>
+    </div>
+    <div class="fig" data-a="zoom" style="--d:3">
+      <svg class="venn" viewBox="0 0 440 400" role="img" aria-label="Diagrama de tres círculos: neurociencias, psicología cognitiva y pedagogía; en su intersección, la neuropedagogía">
+        <circle cx="160" cy="150" r="115" fill="#3366CC" fill-opacity=".55" stroke="#9ec0ff" stroke-width="1.5"/>
+        <circle cx="280" cy="150" r="115" fill="#9ec0ff" fill-opacity=".35" stroke="#9ec0ff" stroke-width="1.5"/>
+        <circle cx="220" cy="250" r="115" fill="#FFD25F" fill-opacity=".35" stroke="#FFD25F" stroke-width="1.5"/>
+        <text x="112" y="104" text-anchor="middle" fill="#fff" font-size="14">Neuro-</text>
+        <text x="112" y="121" text-anchor="middle" fill="#fff" font-size="14">ciencias</text>
+        <text x="328" y="104" text-anchor="middle" fill="#fff" font-size="14">Psicología</text>
+        <text x="328" y="121" text-anchor="middle" fill="#fff" font-size="14">cognitiva</text>
+        <text x="220" y="328" text-anchor="middle" fill="#fff" font-size="14">Pedagogía</text>
+        <circle cx="220" cy="185" r="44" fill="#002a40" stroke="#FFD25F" stroke-width="2"/>
+        <text x="220" y="182" text-anchor="middle" fill="#FFD25F" font-size="11">Neuro-</text>
+        <text x="220" y="196" text-anchor="middle" fill="#FFD25F" font-size="11">pedagogía</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- 04 APRENDIZAJE AUTÓNOMO -->
+<section class="slide light" data-title="Aprendizaje autónomo">
+  <div class="bg" aria-hidden="true">
+    <div class="layer" data-speed="0.12"><svg class="net" data-net="30" data-seed="21" preserveAspectRatio="none"></svg></div>
+    <div class="layer" data-speed="0.3"><div class="orb a" style="width:50vw;height:50vw;left:-18vw;top:30%"></div></div>
+  </div>
+  <div class="wrap two">
+    <div class="fig" data-a="zoom" style="--d:2"><svg id="knowles" viewBox="0 0 460 460" role="img" aria-label="Ciclo del aprendizaje autónomo según Knowles: diagnosticar necesidades, formular metas, identificar recursos, elegir estrategias y evaluar resultados"></svg></div>
+    <div style="display:grid;gap:20px">
+      <p class="eyebrow" data-a="down">Concepto</p>
+      <h2 data-a="right" style="--d:1">Aprendizaje autónomo</h2>
+      <p class="lead" data-a="right" style="--d:2">La persona toma la iniciativa de diagnosticar sus necesidades, formular metas, identificar recursos, elegir estrategias y evaluar sus resultados <span class="cite">(Knowles, 1975)</span>.</p>
+      <p data-a="right" style="--d:3" class="lead">Implica <b style="color:var(--navy)">asumir la responsabilidad</b> sobre el propio aprendizaje <span class="cite">(Holec, 1981)</span> y es una <b style="color:var(--navy)">competencia que se construye</b>, no un rasgo innato <span class="cite">(My Yourney, 2023)</span>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 05 MAPA CONCEPTUAL -->
+<section class="slide light" data-title="Mapa conceptual">
+  <div class="bg" aria-hidden="true">
+    <div class="layer grid-dots" data-speed="0.1" style="color:var(--blue)"></div>
+    <div class="layer" data-speed="0.3"><div class="orb b" style="width:36vw;height:36vw;left:-10vw;top:0"></div></div>
+  </div>
+  <div class="wrap">
+    <p class="eyebrow" data-a="down">Mapa conceptual</p>
+    <h2 data-a="up" style="--d:1">Los conceptos clave y cómo se conectan</h2>
+    <div class="fig wide" data-a="zoom" style="--d:2"><svg id="cmap" class="cmap" viewBox="0 0 960 600" role="img" aria-label="Mapa conceptual de la neuropedagogía y sus conceptos clave"></svg></div>
+    <p class="cmap-note" data-a="fade" style="--d:4">Pasa el cursor o toca un concepto para resaltar sus conexiones.</p>
+  </div>
+</section>
+
+<!-- 06 AUTORREGULACIÓN -->
+<section class="slide dark" data-title="Autorregulación y funciones ejecutivas">
+  <div class="bg" aria-hidden="true">
+    <div class="layer" data-speed="0.3"><div class="orb a" style="width:55vw;height:55vw;left:-15vw;top:20%"></div><div class="orb b" style="width:28vw;height:28vw;right:6vw;top:8%"></div></div>
+    <div class="layer" data-speed="0.12"><svg class="net" data-net="34" data-seed="5" preserveAspectRatio="none"></svg></div>
+  </div>
+  <div class="wrap two">
+    <div style="display:grid;gap:20px">
+      <p class="eyebrow" data-a="down">Conceptos</p>
+      <h2 data-a="left" style="--d:1">Autorregulación, metacognición y funciones ejecutivas</h2>
+      <p class="lead" data-a="left" style="--d:2">La <b class="hl">autorregulación</b> es planificar, supervisar y ajustar pensamientos, emociones y conductas para alcanzar las metas. Zimmerman (2002) la describe como un ciclo de tres fases.</p>
+      <p class="lead" data-a="left" style="--d:3">La <b class="hl">metacognición</b> es saber qué sé, cómo aprendo y qué estrategia me conviene <span class="cite">(Flavell, 1979)</span>. Ambas se apoyan en las <b class="hl">funciones ejecutivas</b> de la corteza prefrontal: control inhibitorio, memoria de trabajo y flexibilidad cognitiva <span class="cite">(Diamond, 2013)</span>.</p>
+    </div>
+    <div class="fig" data-a="zoom" style="--d:3"><svg id="zimmerman" viewBox="0 0 460 460" role="img" aria-label="Ciclo de autorregulación de Zimmerman: previsión, ejecución y autorreflexión, sostenido por las funciones ejecutivas"></svg></div>
+  </div>
+</section>
+
+<!-- 07 IMPORTANCIA -->
+<section class="slide gold" data-title="Importancia">
+  <div class="bg" aria-hidden="true">
+    <div class="layer" data-speed="0.3"><div class="orb a" style="width:60vw;height:60vw;right:-20vw;top:-5%"></div></div>
+    <div class="layer" data-speed="0.12"><svg class="net" data-net="30" data-seed="8" preserveAspectRatio="none"></svg></div>
+    <div class="layer bignum" data-speed="0.45" style="color:var(--navy)">02</div>
+  </div>
+  <div class="wrap">
+    <p class="eyebrow" data-a="down">Importancia</p>
+    <h2 data-a="up" style="--d:1">¿Por qué la neuropedagogía importa al estudiante autónomo?</h2>
+    <p class="lead" data-a="up" style="--d:2" >En la educación a distancia el estudiante decide cómo, cuándo y con qué estrategias estudia. La neuropedagogía le da criterios basados en evidencia para decidir bien.</p>
+    <div class="cards5">
+      <div class="card hov" data-a="up" style="--d:2"><div class="ic"><svg viewBox="0 0 24 24"><path d="M9 11l3 3 8-8"/><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9"/></svg></div><h3>Decisiones basadas en evidencia</h3><p>Autoevaluarse rinde más que releer; distribuir el estudio, más que concentrarlo.</p><span class="cite">Dunlosky et al. (2013)</span></div>
+      <div class="card hov" data-a="up" style="--d:3"><div class="ic"><svg viewBox="0 0 24 24"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg></div><h3>La autonomía se desarrolla</h3><p>La neuroplasticidad muestra que el cerebro cambia con la práctica: la autonomía se entrena.</p><span class="cite">Desiderio Yassir (2023)</span></div>
+      <div class="card hov" data-a="up" style="--d:4"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><h3>Metacognición y autorregulación</h3><p>Entender las funciones ejecutivas ayuda a planificar, monitorear y evaluar el propio proceso.</p><span class="cite">Diamond (2013); Flavell (1979)</span></div>
+      <div class="card hov" data-a="up" style="--d:5"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 21s-7-4.5-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.5-9.5 9-9.5 9z"/></svg></div><h3>Emoción y motivación</h3><p>Emoción y cognición son inseparables: cuidar la motivación y la curiosidad es parte de estudiar.</p><span class="cite">Immordino-Yang &amp; Damasio (2007)</span></div>
+      <div class="card hov" data-a="up" style="--d:6"><div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/><path d="M9 12l2 2 4-4"/></svg></div><h3>Protección frente a neuromitos</h3><p>El pensamiento crítico evita invertir tiempo en prácticas sin sustento científico.</p><span class="cite">Pallarés-Domínguez (2021)</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 08 NEUROMITOS -->
+<section class="slide deep" data-title="Neuromitos">
+  <div class="bg" aria-hidden="true">
+    <div class="layer" data-speed="0.3"><div class="orb b" style="width:45vw;height:45vw;left:-10vw;top:40%"></div><div class="orb a" style="width:50vw;height:50vw;right:-18vw;top:-5%"></div></div>
+    <div class="layer" data-speed="0.12"><svg class="net" data-net="40" data-seed="17" preserveAspectRatio="none"></svg></div>
+  </div>
+  <div class="wrap">
+    <p class="eyebrow" data-a="down">Pensamiento crítico</p>
+    <h2 data-a="up" style="--d:1">¿Mito o evidencia?</h2>
+    <p class="lead" data-a="up" style="--d:2">Los neuromitos son creencias erróneas sobre el cerebro muy difundidas en educación <span class="cite">(Howard-Jones, 2014; Pallarés-Domínguez, 2021)</span>. Toca cada tarjeta para ver qué dice la evidencia.</p>
+    <div class="flips">
+      <button class="flip" type="button" data-a="up" style="--d:3" aria-pressed="false"><div class="inner">
+        <div class="face front"><span class="tag">¿Verdadero?</span><h3>«Solo usamos el 10 % de nuestro cerebro.»</h3><span class="turn">Toca para girar ↻</span></div>
+        <div class="face back"><span class="tag">Mito</span><h3>Usamos todo el cerebro</h3><p>Las distintas regiones se activan según la tarea; no existe una parte «dormida» esperando ser despertada.</p></div>
+      </div></button>
+      <button class="flip" type="button" data-a="up" style="--d:4" aria-pressed="false"><div class="inner">
+        <div class="face front"><span class="tag">¿Verdadero?</span><h3>«Se aprende mejor si se enseña según el estilo visual, auditivo o kinestésico.»</h3><span class="turn">Toca para girar ↻</span></div>
+        <div class="face back"><span class="tag">Mito</span><h3>No hay evidencia</h3><p>Adaptar la enseñanza a un «estilo» no mejora el aprendizaje. Lo que funciona es combinar formatos y practicar activamente.</p></div>
+      </div></button>
+      <button class="flip" type="button" data-a="up" style="--d:5" aria-pressed="false"><div class="inner">
+        <div class="face front"><span class="tag">¿Verdadero?</span><h3>«Hay personas de hemisferio izquierdo (lógicas) y de hemisferio derecho (creativas).»</h3><span class="turn">Toca para girar ↻</span></div>
+        <div class="face back"><span class="tag">Mito</span><h3>Los hemisferios trabajan juntos</h3><p>Ambos hemisferios están conectados y participan en casi todas las tareas, incluidas la lógica y la creatividad.</p></div>
+      </div></button>
+    </div>
+  </div>
+</section>
+
+<!-- 09 PILARES -->
+<section class="slide dark" data-title="Pilares del aprendizaje">
+  <div class="bg" aria-hidden="true">
+    <div class="layer" data-speed="0.3"><div class="orb a" style="width:60vw;height:60vw;left:-20vw;top:-10%"></div></div>
+    <div class="layer" data-speed="0.12"><svg class="net" data-net="34" data-seed="29" preserveAspectRatio="none"></svg></div>
+    <div class="layer bignum" data-speed="0.45">03</div>
+  </div>
+  <div class="wrap">
+    <p class="eyebrow" data-a="down">Principios</p>
+    <h2 data-a="up" style="--d:1">Los principios explican <span class="hl">por qué</span> una estrategia funciona</h2>
+    <p class="lead" data-a="up" style="--d:2">Son enunciados basados en evidencia sobre cómo aprende el cerebro. Dehaene (2019) resume varios en cuatro pilares del aprendizaje.</p>
+    <div class="temple">
+      <div class="roof hov" data-a="down" style="--d:2">Aprendizaje</div>
+      <div class="cols">
+        <div class="col hov" data-a="up" style="--d:3"><h3>Atención</h3><p>Selecciona lo relevante; sin atención no hay procesamiento profundo.</p></div>
+        <div class="col hov" data-a="up" style="--d:4"><h3>Compromiso activo</h3><p>Un cerebro que genera respuestas aprende más que uno que solo recibe.</p></div>
+        <div class="col hov" data-a="up" style="--d:5"><h3>Retroalimentación del error</h3><p>El cerebro ajusta sus predicciones al detectar la diferencia entre lo esperado y lo ocurrido.</p></div>
+        <div class="col hov" data-a="up" style="--d:6"><h3>Consolidación</h3><p>Lo aprendido se estabiliza con el tiempo, la repetición distribuida y el sueño.</p></div>
+      </div>
+      <div class="base" data-a="fade" style="--d:7">Base: neuroplasticidad · el cerebro cambia con la experiencia</div>
+    </div>
+  </div>
+</section>
+
+<!-- 10 OCHO PRINCIPIOS -->
+<section class="slide light" data-title="Ocho principios">
+  <div class="bg" aria-hidden="true">
+    <div class="layer" data-speed="0.12"><svg class="net" data-net="30" data-seed="41" preserveAspectRatio="none"></svg></div>
+    <div class="layer" data-speed="0.3"><div class="orb b" style="width:40vw;height:40vw;right:-10vw;top:50%"></div></div>
+  </div>
+  <div class="wrap">
+    <p class="eyebrow" data-a="down">Principios neuropedagógicos</p>
+    <h2 data-a="up" style="--d:1">Ocho principios para aprender de forma autónoma</h2>
+    <p class="lead" data-a="up" style="--d:2">Toca cada principio para ver su implicación práctica.</p>
+    <div class="pgrid" id="pgrid"></div>
+  </div>
+</section>
+
+<!-- 11 MÉTODOS -->
+<section class="slide deep" data-title="Métodos didácticos">
+  <div class="bg" aria-hidden="true">
+    <div class="layer" data-speed="0.3"><div class="orb a" style="width:55vw;height:55vw;right:-18vw;top:30%"></div></div>
+    <div class="layer" data-speed="0.12"><svg class="net" data-net="36" data-seed="52" preserveAspectRatio="none"></svg></div>
+    <div class="layer bignum" data-speed="0.45">04</div>
+  </div>
+  <div class="wrap">
+    <p class="eyebrow" data-a="down">Métodos didácticos</p>
+    <h2 data-a="up" style="--d:1">Ocho métodos que llevan los principios a la práctica</h2>
+    <div class="mtabs">
+      <div class="mlist" role="tablist" aria-label="Métodos didácticos" id="mlist" data-a="left" style="--d:2"></div>
+      <div class="mpanel" role="tabpanel" id="mpanel" aria-live="polite" data-a="right" style="--d:3"></div>
+    </div>
+  </div>
+</section>
+
+<!-- 12 PRINCIPIO → MÉTODO -->
+<section class="slide light" data-title="Principios y métodos">
+  <div class="bg" aria-hidden="true">
+    <div class="layer grid-dots" data-speed="0.1" style="color:var(--navy)"></div>
+    <div class="layer" data-speed="0.3"><div class="orb a" style="width:50vw;height:50vw;left:-15vw;top:20%"></div></div>
+  </div>
+  <div class="wrap">
+    <p class="eyebrow" data-a="down">Del porqué al cómo</p>
+    <h2 data-a="up" style="--d:1">Cada método aplica uno o más principios</h2>
+    <div class="bridge" id="bridge" data-a="fade" style="--d:2">
+      <svg class="wires" id="wires" aria-hidden="true"></svg>
+      <div><div class="colhead">Principio · toca uno</div><ul id="pcol"></ul></div>
+      <div class="mcol"><div class="colhead">Método que lo aplica</div><ul id="mcol"></ul></div>
+    </div>
+    <div class="bridge-ex" id="bridgeEx" data-a="up" style="--d:3">Selecciona un principio para ver qué métodos lo aplican y un ejemplo.</div>
+  </div>
+</section>
+
+<!-- 13 INFOGRAFÍA -->
+<section class="slide gold" data-title="Infografía: una semana de estudio">
+  <div class="bg" aria-hidden="true">
+    <div class="layer" data-speed="0.3"><div class="orb a" style="width:50vw;height:50vw;left:-15vw;top:30%"></div></div>
+    <div class="layer" data-speed="0.12"><svg class="net" data-net="26" data-seed="64" preserveAspectRatio="none"></svg></div>
+  </div>
+  <div class="wrap">
+    <p class="eyebrow" data-a="down">Infografía</p>
+    <h2 data-a="up" style="--d:1">Una semana de estudio autónomo con neuropedagogía</h2>
+    <div class="ig">
+      <div style="display:grid;gap:14px">
+        <div class="fig" data-a="zoom" style="--d:2"><svg id="curve" viewBox="0 0 560 300" role="img" aria-label="Esquema ilustrativo de la curva del olvido: cada repaso espaciado hace que el recuerdo decaiga más despacio"></svg></div>
+        <p class="cite" data-a="fade" style="--d:4">Esquema ilustrativo, sin valores reales. Basado en la práctica espaciada (Dunlosky et al., 2013) y el efecto del testeo (Roediger &amp; Karpicke, 2006).</p>
+      </div>
+      <div style="display:grid;gap:14px">
+        <div class="week">
+          <div class="row" data-a="right" style="--d:2"><span class="day">Lunes</span><div class="bar k">Estudio del tema · 2 bloques de 25 min sin celular</div></div>
+          <div class="row" data-a="right" style="--d:3"><span class="day">Martes</span><div class="bar r">Repaso 1 · autoevaluación con preguntas</div></div>
+          <div class="row" data-a="right" style="--d:4"><span class="day">Miércoles</span><div class="bar">Problema o caso real (ABP) · aplicar lo aprendido</div></div>
+          <div class="row" data-a="right" style="--d:5"><span class="day">Jueves</span><div class="bar">Foro: explicar el tema a los compañeros</div></div>
+          <div class="row" data-a="right" style="--d:6"><span class="day">Viernes</span><div class="bar">Cuestionario con IA · revisar errores</div></div>
+          <div class="row" data-a="right" style="--d:7"><span class="day">Domingo</span><div class="bar r">Repaso 2 · diario: ¿qué sé?, ¿qué me falta?</div></div>
+          <div class="row" data-a="right" style="--d:8"><span class="day">Cada noche</span><div class="bar">Dormir bien · la consolidación ocurre en parte durante el sueño</div></div>
+        </div>
+        <div class="legend" data-a="fade" style="--d:8"><span><i style="background:var(--navy)"></i>Estudio nuevo</span><span><i style="background:var(--blue)"></i>Repaso espaciado</span><span><i style="background:#fff;border:1px solid rgba(0,70,105,.3)"></i>Aplicación y metacognición</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 14 IA -->
+<section class="slide dark" data-title="La IA como aliada">
+  <div class="bg" aria-hidden="true">
+    <div class="layer" data-speed="0.3"><div class="orb b" style="width:40vw;height:40vw;right:-8vw;top:8%"></div><div class="orb a" style="width:55vw;height:55vw;left:-20vw;top:40%"></div></div>
+    <div class="layer" data-speed="0.12"><svg class="net" data-net="44" data-seed="77" preserveAspectRatio="none"></svg></div>
+  </div>
+  <div class="wrap">
+    <p class="eyebrow" data-a="down">Uso estratégico de la IA</p>
+    <h2 data-a="up" style="--d:1">La IA como andamiaje del aprendizaje autónomo</h2>
+    <p class="lead" data-a="up" style="--d:2">La IA permite adaptar contenidos, ritmos y retroalimentación a cada estudiante <span class="cite">(Aparicio-Gómez et al., 2025)</span>, y el uso estratégico de las TIC favorece la autoeficacia <span class="cite">(Riquero, 2025)</span>.</p>
+    <div class="ai">
+      <div class="use hov" data-a="up" style="--d:3"><div class="ic"><svg viewBox="0 0 24 24"><path d="M9 9a3 3 0 1 1 4 2.8c-.6.3-1 .9-1 1.6V15"/><circle cx="12" cy="18.5" r=".6"/><circle cx="12" cy="12" r="10"/></svg></div><div><h3>Cuestionarios de recuperación</h3><p>Generar preguntas a partir de las lecturas para autoevaluarse (práctica de recuperación).</p></div></div>
+      <div class="use hov" data-a="up" style="--d:4"><div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="5" r="2.5"/><circle cx="5" cy="19" r="2.5"/><circle cx="19" cy="19" r="2.5"/><path d="M11 7.2L6.2 16.8M13 7.2l4.8 9.6M7.5 19h9"/></svg></div><div><h3>Mapas conceptuales</h3><p>Organizar conceptos y sus relaciones para comprender la estructura de un tema.</p></div></div>
+      <div class="use hov" data-a="up" style="--d:5"><div class="ic"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div><div><h3>Tutor que ajusta el nivel</h3><p>Explicaciones y ejemplos adaptados al ritmo y a los conocimientos previos.</p></div></div>
+      <div class="use hov" data-a="up" style="--d:6"><div class="ic"><svg viewBox="0 0 24 24"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg></div><div><h3>Retroalimentación inmediata</h3><p>Detectar errores pronto y corregirlos, motor del aprendizaje según los principios.</p></div></div>
+    </div>
+    <div class="caution hov" data-a="up" style="--d:7">
+      <h3>Con criterio</h3>
+      <ul><li>Verificar la información y las citas que entrega la IA.</li><li>Usarla para pensar mejor, no para dejar de pensar: la recuperación y la reflexión las hace el estudiante.</li></ul>
+    </div>
+  </div>
+</section>
+
+<!-- 15 CONCLUSIONES -->
+<section class="slide gold" data-title="Conclusiones">
+  <div class="bg" aria-hidden="true">
+    <div class="layer" data-speed="0.3"><div class="orb a" style="width:60vw;height:60vw;right:-20vw;top:10%"></div></div>
+    <div class="layer" data-speed="0.12"><svg class="net" data-net="28" data-seed="91" preserveAspectRatio="none"></svg></div>
+  </div>
+  <div class="wrap two">
+    <div style="display:grid;gap:22px">
+      <p class="eyebrow" data-a="down">Análisis crítico</p>
+      <h2 data-a="left" style="--d:1">Conclusiones</h2>
+      <p class="quote" data-a="left" style="--d:2">El estudiante autónomo no estudia más: estudia sabiendo cómo aprende su cerebro.</p>
+    </div>
+    <ol class="concl">
+      <li class="hov" data-a="right" style="--d:2">Conceptos, principios y métodos son niveles distintos: definir, explicar por qué y actuar.</li>
+      <li class="hov" data-a="right" style="--d:3">Los métodos más eficaces para la autonomía (recuperación, práctica espaciada, metacognición) se apoyan en principios sólidos sobre memoria y atención.</li>
+      <li class="hov" data-a="right" style="--d:4">La autonomía es una competencia que se entrena gracias a la neuroplasticidad, no un rasgo fijo.</li>
+      <li class="hov" data-a="right" style="--d:5">Autonomía no es aislamiento: el cerebro es social y el aprendizaje colaborativo la fortalece.</li>
+      <li class="hov" data-a="right" style="--d:6">La IA es un andamiaje valioso si se usa con criterio y sin delegar el pensamiento.</li>
+    </ol>
+  </div>
+</section>
+
+<!-- 16 REFERENCIAS Y EQUIPO -->
+<section class="slide deep" data-title="Referencias y equipo">
+  <div class="bg" aria-hidden="true">
+    <div class="layer" data-speed="0.12"><svg class="net" data-net="30" data-seed="99" preserveAspectRatio="none"></svg></div>
+    <div class="layer" data-speed="0.3"><div class="orb a" style="width:50vw;height:50vw;left:-20vw;top:30%"></div></div>
+  </div>
+  <div class="wrap">
+    <p class="eyebrow" data-a="down">Equipo colaborativo</p>
+    <div class="team" data-a="up" style="--d:1">
+      <div><p>Marinella Álvarez Paternina</p></div>
+      <div><p>Marela Nieves Oñate</p></div>
+      <div><p>Diana Carolina Mendez Vasquez</p></div>
+      <div><p>Alberto Jose Garcia Stave</p></div>
+      <div><p>Gloria Angelica Luquez Rodriguez</p></div>
+    </div>
+    <p class="eyebrow" data-a="down" style="--d:2">Referencias · APA 7</p>
+    <div class="refs" data-a="up" style="--d:3">
+      <p>Aparicio-Gómez, O.-Y., Ostos-Ortiz, O.-L., &amp; Abadía-García, C. (2025). Inteligencia artificial y aprendizaje personalizado en el siglo XXI. <i>Revista Interamericana de Investigación, Educación y Pedagogía RIIEP, 18</i>(2), 87-100. https://revistas.usantotomas.edu.co/index.php/riiep/article/view/11122</p>
+      <p>Araya-Pizarro, S. C., &amp; Espinoza Pastén, L. (2020). Aportes desde las neurociencias para la comprensión de los procesos de aprendizaje en los contextos educativos. <i>Propósitos y Representaciones, 8</i>(1), e312. https://doi.org/10.20511/pyr2020.v8n1.312</p>
+      <p>Burgueño-López, J. (2022). Neuroeducación: ¿Cómo aprende mejor el cerebro? <i>Padres y Maestros, 389</i>, 6-11. https://doi.org/10.14422/pym.i389.y2022.001</p>
+      <p>Dehaene, S. (2019). <i>¿Cómo aprendemos? Los cuatro pilares con los que la educación puede potenciar los talentos de nuestro cerebro</i>. Siglo XXI Editores.</p>
+      <p>Desiderio Yassir, V. (2023). Neuroplasticidad y su significación en la praxis directiva. <i>HOLOPRAXIS, 7</i>(2), 114-131. https://doi.org/10.61154/holopraxis.v7i2.3314</p>
+      <p>Diamond, A. (2013). Executive functions. <i>Annual Review of Psychology, 64</i>, 135-168. https://doi.org/10.1146/annurev-psych-113011-143750</p>
+      <p>Dunlosky, J., Rawson, K. A., Marsh, E. J., Nathan, M. J., &amp; Willingham, D. T. (2013). Improving students' learning with effective learning techniques. <i>Psychological Science in the Public Interest, 14</i>(1), 4-58. https://doi.org/10.1177/1529100612453266</p>
+      <p>Flavell, J. H. (1979). Metacognition and cognitive monitoring. <i>American Psychologist, 34</i>(10), 906-911. https://doi.org/10.1037/0003-066X.34.10.906</p>
+      <p>Holec, H. (1981). <i>Autonomy and foreign language learning</i>. Pergamon.</p>
+      <p>Howard-Jones, P. A. (2014). Neuroscience and education: Myths and messages. <i>Nature Reviews Neuroscience, 15</i>(12), 817-824. https://doi.org/10.1038/nrn3817</p>
+      <p>Immordino-Yang, M. H., &amp; Damasio, A. (2007). We feel, therefore we learn. <i>Mind, Brain, and Education, 1</i>(1), 3-10. https://doi.org/10.1111/j.1751-228X.2007.00004.x</p>
+      <p>Knowles, M. S. (1975). <i>Self-directed learning: A guide for learners and teachers</i>. Association Press.</p>
+      <p>Mora, F. (2013). <i>Neuroeducación: Solo se puede aprender aquello que se ama</i>. Alianza Editorial.</p>
+      <p>My Yourney. (2023, 13 de febrero). <i>Aprendizaje autodirigido</i> [Conferencia TEDx]. TEDxPaseoSantaLucía. https://www.youtube.com/watch?v=_FdMuEWw0AY</p>
+      <p>Pallarés-Domínguez, D. (2021). La reflexión crítica sobre los neuromitos en la educación. <i>Teoría de la Educación, 33</i>(2), 87-106. https://doi.org/10.14201/teri.25288</p>
+      <p>Riquero, S. Y. (2025). Estrategias de aprendizaje autónomo a través de las TIC en estudios sociales. <i>Revista Científica Zambos, 4</i>(1), 74-86. https://doi.org/10.69484/rcz/v4/n1/77</p>
+      <p>Roediger, H. L., &amp; Karpicke, J. D. (2006). Test-enhanced learning. <i>Psychological Science, 17</i>(3), 249-255. https://doi.org/10.1111/j.1467-9280.2006.01693.x</p>
+      <p>Zimmerman, B. J. (2002). Becoming a self-regulated learner: An overview. <i>Theory Into Practice, 41</i>(2), 64-70. https://doi.org/10.1207/s15430421tip4102_2</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<script>
+(function(){
+  var root=document.documentElement;
+  var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  root.classList.add('anim');
+  var first=document.querySelector('.slide');
+  if(first&&!reduce){first.classList.remove('is-in');requestAnimationFrame(function(){requestAnimationFrame(function(){first.classList.add('is-in');});});}
+  var deck=document.getElementById('deck');
+  var slides=[].slice.call(document.querySelectorAll('.slide'));
+  var NS='http://www.w3.org/2000/svg';
+  function el(tag,attrs,parent,text){var e=document.createElementNS(NS,tag);for(var k in attrs)e.setAttribute(k,attrs[k]);if(text!=null)e.textContent=text;if(parent)parent.appendChild(e);return e;}
+
+  /* ---- Redes neuronales decorativas (semilla fija: siempre igual) ---- */
+  function rng(seed){return function(){seed=(seed*16807)%2147483647;return (seed-1)/2147483646;};}
+  [].forEach.call(document.querySelectorAll('svg.net'),function(svg){
+    var n=+svg.getAttribute('data-net')||30,r=rng(+svg.getAttribute('data-seed')||1);
+    svg.setAttribute('viewBox','0 0 1000 1000');
+    var pts=[];for(var i=0;i<n;i++)pts.push([r()*1000,r()*1000]);
+    var li=0;
+    pts.forEach(function(p,i){pts.forEach(function(q,j){if(j>i){var d=Math.hypot(p[0]-q[0],p[1]-q[1]);if(d<170){el('line',{x1:p[0],y1:p[1],x2:q[0],y2:q[1],pathLength:'1',style:'--i:'+(li%24)},svg);li++;}}});});
+    pts.forEach(function(p,i){el('circle',{cx:p[0],cy:p[1],r:2+r()*3,style:'--i:'+(i%24)},svg);});
+  });
+
+  /* ---- Ciclos (Knowles y Zimmerman) ---- */
+  function cycle(id,items,opt){
+    var svg=document.getElementById(id),cx=230,cy=230,R=opt.R||160,n=items.length;
+    var defs=el('defs',{},svg),m=el('marker',{id:id+'-arr',viewBox:'0 0 10 10',refX:'8',refY:'5',markerWidth:'7',markerHeight:'7',orient:'auto'},defs);
+    el('path',{d:'M0 0L10 5L0 10z',fill:opt.arrow},m);
+    el('circle',{cx:cx,cy:cy,r:R,fill:'none',stroke:opt.ring,'stroke-width':'1.5','stroke-dasharray':'4 6'},svg);
+    var ang=function(i){return -Math.PI/2+i*2*Math.PI/n;};
+    for(var i=0;i<n;i++){
+      var a1=ang(i)+0.32,a2=ang(i+1)-0.32;
+      el('path',{d:'M'+(cx+R*Math.cos(a1))+' '+(cy+R*Math.sin(a1))+' A'+R+' '+R+' 0 0 1 '+(cx+R*Math.cos(a2))+' '+(cy+R*Math.sin(a2)),fill:'none',stroke:opt.arrow,'stroke-width':'2.5','marker-end':'url(#'+id+'-arr)'},svg);
+    }
+    var cg=el('g',{'class':'ccore'},svg);
+    el('circle',{cx:cx,cy:cy,r:opt.coreR||70,fill:opt.coreFill,stroke:opt.coreStroke,'stroke-width':'2'},cg);
+    opt.core.forEach(function(t,k){el('text',{x:cx,y:cy+(k-(opt.core.length-1)/2)*18+5,'text-anchor':'middle','font-family':'Bricolage Grotesque, sans-serif','font-weight':'700','font-size':'15',fill:opt.coreText},cg,t);});
+    items.forEach(function(it,i){
+      var x=cx+R*Math.cos(ang(i)),y=cy+R*Math.sin(ang(i)),w=opt.w||120,h=it.length*17+20;
+      var g=el('g',{'class':'cnode'},svg);
+      el('rect',{x:x-w/2,y:y-h/2,width:w,height:h,rx:'12',fill:opt.boxFill,stroke:opt.boxStroke,'stroke-width':'1.5'},g);
+      it.forEach(function(t,k){el('text',{x:x,y:y+(k-(it.length-1)/2)*17+5,'text-anchor':'middle','font-family':'Atkinson Hyperlegible, sans-serif','font-size':'14','font-weight':k===0?'700':'400',fill:opt.boxText},g,t);});
+    });
+  }
+  cycle('knowles',[['1. Diagnosticar','necesidades'],['2. Formular','metas'],['3. Identificar','recursos'],['4. Elegir','estrategias'],['5. Evaluar','resultados']],
+    {R:165,w:128,ring:'rgba(0,70,105,.35)',arrow:'#3366CC',coreFill:'#004669',coreStroke:'#FFD25F',coreText:'#ffffff',core:['Aprendizaje','autónomo'],boxFill:'#ffffff',boxStroke:'rgba(0,70,105,.35)',boxText:'#0b2433'});
+  cycle('zimmerman',[['Previsión','metas y plan'],['Ejecución','monitorear y','controlar'],['Autorreflexión','evaluar y','ajustar']],
+    {R:150,w:140,coreR:80,ring:'rgba(158,192,255,.5)',arrow:'#FFD25F',coreFill:'#002a40',coreStroke:'#9ec0ff',coreText:'#ffffff',core:['Funciones','ejecutivas'],boxFill:'#3366CC',boxStroke:'#9ec0ff',boxText:'#ffffff'});
+
+  /* ---- Mapa conceptual ---- */
+  (function(){
+    var svg=document.getElementById('cmap');
+    var N={
+      np:{x:480,y:290,t:['Neuropedagogía'],main:1},
+      pl:{x:120,y:70,t:['Neuroplasticidad']},
+      at:{x:360,y:70,t:['Atención']},
+      me:{x:600,y:70,t:['Memoria y','consolidación']},
+      em:{x:840,y:70,t:['Emoción y','motivación']},
+      mi:{x:120,y:290,t:['Neuromitos']},
+      di:{x:840,y:290,t:['Neurociencias, psicología','cognitiva y pedagogía']},
+      mc:{x:140,y:500,t:['Metacognición']},
+      aa:{x:480,y:500,t:['Aprendizaje','autónomo'],gold:1},
+      ar:{x:820,y:500,t:['Autorregulación']},
+      fe:{x:820,y:580,t:['Funciones ejecutivas'],small:1}
+    };
+    var E=[['np','pl','se basa en la'],['np','at','estudia la'],['np','me','explica la'],['np','em','integra la'],['np','mi','desmiente los'],['np','di','integra'],['np','aa','orienta el'],['mc','aa','dirige el'],['ar','aa','sostiene el'],['fe','ar','son la base de la'],['pl','aa','hace entrenable el']];
+    var size=function(n){var w=Math.max.apply(null,n.t.map(function(s){return s.length;}))*(n.main?13:8.6)+36;return {w:w,h:n.t.length*(n.main?26:18)+(n.main?30:20)};};
+    var gE=el('g',{},svg),gN=el('g',{},svg),edges=[];
+    E.forEach(function(e){
+      var a=N[e[0]],b=N[e[1]],g=el('g',{'class':'edge'},gE);
+      var x1=a.x,y1=a.y,x2=b.x,y2=b.y;
+      if(e[0]==='pl'&&e[1]==='aa'){ el('path',{d:'M120 92 C 40 300, 260 470, 400 500',fill:'none',stroke:'rgba(51,102,204,.35)','stroke-width':'1.5','stroke-dasharray':'5 5'},g); el('text',{x:150,y:400,'class':'lbl'},g,e[2]); }
+      else if(e[0]==='fe'){ el('line',{x1:x1,y1:y1-14,x2:x2,y2:y2+20,stroke:'rgba(0,70,105,.45)','stroke-width':'1.5'},g); el('text',{x:x1+92,y:(y1+y2)/2+6,'class':'lbl','text-anchor':'middle'},g,e[2]); }
+      else {
+        el('line',{x1:x1,y1:y1,x2:x2,y2:y2,stroke:'rgba(0,70,105,.45)','stroke-width':'1.5'},g);
+        var mx=(x1+x2)/2,my=(y1+y2)/2,tw=e[2].length*7.4+12;
+        el('rect',{x:mx-tw/2,y:my-11,width:tw,height:20,rx:'4',fill:'#F1F5F8'},g);
+        el('text',{x:mx,y:my+4,'class':'lbl','text-anchor':'middle'},g,e[2]);
+      }
+      edges.push({g:g,a:e[0],b:e[1]});
+    });
+    Object.keys(N).forEach(function(k){
+      var n=N[k],s=size(n),g=el('g',{'class':'node',tabindex:'0','data-k':k},gN);
+      el('rect',{x:n.x-s.w/2,y:n.y-s.h/2,width:s.w,height:s.h,rx:'12',fill:n.main?'#004669':n.gold?'#FFD25F':'#ffffff',stroke:n.main?'#FFD25F':n.gold?'#e8b72c':'rgba(0,70,105,.4)','stroke-width':n.main?'3':'1.5'},g);
+      n.t.forEach(function(t,i){el('text',{x:n.x,y:n.y+(i-(n.t.length-1)/2)*(n.main?26:18)+(n.main?8:5),'text-anchor':'middle','font-size':n.main?'24':(n.small?'14':'15'),'font-weight':'700',fill:n.main?'#ffffff':'#0b2433','font-family':n.main?'Bricolage Grotesque, sans-serif':'Atkinson Hyperlegible, sans-serif'},g,t);});
+      function on(){svg.classList.add('focus');[].forEach.call(gN.children,function(c){c.classList.toggle('on',c===g||edges.some(function(e){return (e.a===k&&e.b===c.getAttribute('data-k'))||(e.b===k&&e.a===c.getAttribute('data-k'));}));});edges.forEach(function(e){e.g.classList.toggle('on',e.a===k||e.b===k);});}
+      function off(){svg.classList.remove('focus');}
+      g.addEventListener('mouseenter',on);g.addEventListener('mouseleave',off);g.addEventListener('focus',on);g.addEventListener('blur',off);
+      g.addEventListener('click',function(){svg.classList.contains('focus')&&g.classList.contains('on')&&document.activeElement===g?off():on();});
+    });
+  })();
+
+  /* ---- Curva del olvido (esquema) ---- */
+  (function(){
+    var svg=document.getElementById('curve'),x0=50,x1=540,y0=40,yb=250;
+    el('line',{x1:x0,y1:yb,x2:x1,y2:yb,stroke:'#004669','stroke-width':'1.5'},svg);
+    el('line',{x1:x0,y1:y0-10,x2:x0,y2:yb,stroke:'#004669','stroke-width':'1.5'},svg);
+    el('text',{x:x0-8,y:y0,'text-anchor':'end',transform:'rotate(-90 '+(x0-14)+' '+(y0+60)+')','font-family':'IBM Plex Mono, monospace','font-size':'12',fill:'#004669'},svg,'Recuerdo');
+    var days=[['Día 0',0],['Día 1',1],['Día 7',3],['Día 30',6]],X=function(u){return x0+u*(x1-x0)/6.6;};
+    days.forEach(function(d){el('text',{x:X(d[1]),y:yb+22,'text-anchor':'middle','font-family':'IBM Plex Mono, monospace','font-size':'12',fill:'#004669'},svg,d[0]);});
+    // sin repaso
+    el('path',{d:'M'+X(0)+' '+y0+' C '+X(.4)+' '+(yb-40)+', '+X(1.5)+' '+(yb-25)+', '+X(6.4)+' '+(yb-15),fill:'none',stroke:'#0b2433','stroke-width':'2','stroke-dasharray':'6 6',opacity:'.55'},svg);
+    // con repasos
+    var segs=[[0,1,95],[1,3,70],[3,6,40],[6,6.4,30]],d='M'+X(0)+' '+y0;
+    segs.forEach(function(s){var a=X(s[0]),b=X(s[1]),drop=yb-s[2];d+=' C '+(a+(b-a)*.3)+' '+(y0+(drop-y0)*.8)+', '+(a+(b-a)*.6)+' '+drop+', '+b+' '+drop;if(s[1]<6.4)d+=' L '+b+' '+y0;});
+    el('path',{d:d,fill:'none',stroke:'#004669','stroke-width':'3.5','stroke-linejoin':'round'},svg);
+    [1,3,6].forEach(function(u){el('circle',{cx:X(u),cy:y0,r:'7',fill:'#3366CC',stroke:'#fff','stroke-width':'2'},svg);});
+    el('text',{x:X(1)+12,y:y0-12,'font-family':'IBM Plex Mono, monospace','font-size':'12',fill:'#004669'},svg,'repasos');
+    el('text',{x:X(4.2),y:yb-48,'font-family':'Atkinson Hyperlegible, sans-serif','font-size':'13',fill:'#0b2433',opacity:'.75'},svg,'sin repaso');
+    el('text',{x:X(4.2),y:y0+60,'font-family':'Atkinson Hyperlegible, sans-serif','font-size':'13','font-weight':'700',fill:'#004669'},svg,'con repaso espaciado');
+  })();
+
+  /* ---- Datos: principios y métodos ---- */
+  var P=[
+    ['El cerebro es plástico: cambia con la experiencia','Las capacidades no son fijas; la práctica sostenida mejora el desempeño y la autonomía misma se aprende.','Desiderio Yassir (2023)'],
+    ['La atención es limitada y es la puerta del aprendizaje','Proteger la atención: sesiones cortas y enfocadas, sin multitarea ni distracciones digitales.','Burgueño-López (2022); Dehaene (2019)'],
+    ['Se aprende haciendo: el compromiso activo supera la recepción pasiva','Estudiar es autoevaluarse, explicar y aplicar; recuperar de memoria fortalece más que releer.','Roediger & Karpicke (2006)'],
+    ['El error y la retroalimentación son motores del aprendizaje','Equivocarse es parte del proceso; lo importante es recibir retroalimentación pronto y usarla.','Dehaene (2019)'],
+    ['La memoria necesita tiempo, repetición distribuida y descanso','Planificar repasos espaciados y respetar el sueño es parte de estudiar.','Dunlosky et al. (2013)'],
+    ['Emoción y cognición son inseparables','Conectar los contenidos con metas e intereses propios sostiene la motivación intrínseca.','Immordino-Yang & Damasio (2007); Mora (2013)'],
+    ['El cerebro es social','La autonomía no es aislamiento: el estudiante autónomo sabe cuándo y cómo apoyarse en otros.','Immordino-Yang & Damasio (2007)'],
+    ['Cada cerebro es único y la autorregulación se entrena','Personalizar ritmos y estrategias, y practicar la planificación, el monitoreo y la autoevaluación.','Diamond (2013); Zimmerman (2002)']
+  ];
+  var M=[
+    {t:'Práctica de recuperación',f:'Traer a la mente una información sin mirarla fortalece las redes neuronales que la sostienen. El efecto del testeo produce una retención mayor que la relectura (Roediger & Karpicke, 2006).',a:'Autoevaluarse con preguntas, tarjetas de memoria, explicaciones en voz alta o cuestionarios generados con IA a partir de las lecturas.',x:['Tarjetas de memoria','Explicar en voz alta','Cuestionarios con IA']},
+    {t:'Práctica espaciada e intercalada',f:'La consolidación necesita tiempo y ocurre en parte durante el descanso y el sueño. Distribuir el estudio es más eficaz que concentrarlo; mezclar temas mejora la discriminación y la transferencia (Dunlosky et al., 2013).',a:'Cronogramas de repaso, aplicaciones de repetición espaciada y alternancia de contenidos. Desarrolla la gestión del tiempo.',x:['Cronograma de repasos','Apps de repetición','Alternar temas']},
+    {t:'Estrategias metacognitivas y de autorregulación',f:'La autorregulación depende de las funciones ejecutivas de la corteza prefrontal. El modelo de Zimmerman (2002) describe previsión, ejecución y autorreflexión.',a:'Diarios de aprendizaje, listas de autoverificación, rúbricas de autoevaluación y preguntas como ¿qué sé?, ¿qué me falta?, ¿qué estrategia me funcionó?',x:['Diario de aprendizaje','Rúbrica de autoevaluación','Lista de verificación']},
+    {t:'Aprendizaje basado en problemas y proyectos (ABP)',f:'El cerebro aprende mejor cuando el contenido tiene sentido, conecta con lo que ya sabe y genera curiosidad. La emoción y la motivación favorecen la atención y la consolidación (Burgueño-López, 2022).',a:'Ante un problema real, el estudiante identifica qué necesita saber, busca información, decide y evalúa resultados.',x:['Casos reales','Proyectos','Problemas del contexto']},
+    {t:'Aula invertida',f:'El estudiante trabaja primero los contenidos a su ritmo y el encuentro sincrónico se dedica a aplicar, debatir y resolver dudas. Respeta los ritmos de procesamiento.',a:'Encaja con la educación a distancia de la UNAD: el estudiante gestiona su tiempo y su comprensión de manera autónoma.',x:['Lectura previa','Encuentro para aplicar','Resolver dudas']},
+    {t:'Aprendizaje colaborativo',f:'El cerebro es un órgano social. Explicar a otros, contrastar ideas y recibir retroalimentación activa procesos de elaboración profunda.',a:'Identificar cuándo pedir ayuda, cómo aportar y cómo usar la retroalimentación de los compañeros.',x:['Foros','Reuniones sincrónicas','Retroalimentación de pares']},
+    {t:'Gamificación y retroalimentación inmediata',f:'Los sistemas de recompensa del cerebro, mediados por la dopamina, responden a los logros progresivos, la novedad y la retroalimentación inmediata.',a:'Barras de progreso, niveles, retos y cuestionarios interactivos que mantienen la constancia en el estudio independiente.',x:['Retos','Niveles','Cuestionarios interactivos']},
+    {t:'Personalización mediada por TIC e IA',f:'Cada cerebro tiene una trayectoria distinta. La IA adapta contenidos, ritmos y retroalimentación (Aparicio-Gómez et al., 2025) y las TIC favorecen la autoeficacia (Riquero, 2025).',a:'Tutores inteligentes, mapas conceptuales y cuestionarios personalizados como andamiaje permanente.',x:['Tutor inteligente','Mapas con IA','Cuestionarios personalizados']}
+  ];
+  var MAP=[[1,2],[6,4],[0,3],[6,7],[1],[3,6],[5,4],[7,2]];
+  var EX=['Practicar con regularidad una habilidad y registrar el progreso en un diario de aprendizaje.','Sesiones cortas con metas claras y retos breves, sin multitarea.','Responder preguntas de memoria antes de volver a leer; resolver un caso real.','Cuestionarios interactivos que muestran la respuesta correcta al instante.','Cronograma de repasos a 1 día, 1 semana y 1 mes; dormir bien antes de una evaluación.','Elegir proyectos conectados con intereses propios o con el contexto profesional.','Explicar un tema a los compañeros en el foro o en la reunión sincrónica.','Usar un tutor de IA que ajuste el nivel y aplicar el ciclo previsión, ejecución y autorreflexión.'];
+
+  /* principios */
+  var pg=document.getElementById('pgrid');
+  P.forEach(function(p,i){
+    var b=document.createElement('button');b.type='button';b.className='pcard';b.setAttribute('data-a','up');b.style.setProperty('--d',2+i*0.6);b.setAttribute('aria-expanded','false');
+    b.innerHTML='<span class="n">'+(i+1)+'</span><h3></h3><p class="imp"><b>Implicación:</b> <span></span><br><span class="cite"></span></p><span class="more">Ver implicación +</span>';
+    b.querySelector('h3').textContent=p[0];b.querySelector('.imp span').textContent=p[1];b.querySelector('.imp .cite').textContent=p[2];
+    b.addEventListener('click',function(){b.setAttribute('aria-expanded',b.getAttribute('aria-expanded')==='true'?'false':'true');});
+    pg.appendChild(b);
+  });
+
+  /* métodos (pestañas) */
+  var ml=document.getElementById('mlist'),mp=document.getElementById('mpanel'),tabs=[];
+  function showM(i,focus){
+    tabs.forEach(function(t,j){t.setAttribute('aria-selected',j===i?'true':'false');t.tabIndex=j===i?0:-1;});
+    var m=M[i];
+    mp.innerHTML='<span class="eyebrow" style="color:var(--gold)">Método '+(i+1)+' de 8</span><h3></h3><div class="cols2"><div><h4>Fundamento neuropedagógico</h4><p class="f"></p></div><div><h4>Aplicación al aprendizaje autónomo</h4><p class="a"></p></div></div><div class="ex"></div>';
+    mp.querySelector('h3').textContent=m.t;mp.querySelector('.f').textContent=m.f;mp.querySelector('.a').textContent=m.a;
+    m.x.forEach(function(s){var sp=document.createElement('span');sp.textContent=s;mp.querySelector('.ex').appendChild(sp);});
+    mp.classList.remove('swap');void mp.offsetWidth;mp.classList.add('swap');
+    if(focus)tabs[i].focus();
+  }
+  M.forEach(function(m,i){
+    var b=document.createElement('button');b.type='button';b.setAttribute('role','tab');b.innerHTML='<b>'+(i+1)+'</b><span></span>';b.querySelector('span').textContent=m.t;
+    b.addEventListener('click',function(){showM(i);});
+    b.addEventListener('keydown',function(e){if(e.key==='ArrowDown'||e.key==='ArrowRight'){e.preventDefault();e.stopPropagation();showM((i+1)%8,true);}if(e.key==='ArrowUp'||e.key==='ArrowLeft'){e.preventDefault();e.stopPropagation();showM((i+7)%8,true);}});
+    ml.appendChild(b);tabs.push(b);
+  });
+  showM(0);
+
+  /* puente principio -> método */
+  var pc=document.getElementById('pcol'),mc=document.getElementById('mcol'),br=document.getElementById('bridge'),wires=document.getElementById('wires'),bex=document.getElementById('bridgeEx'),pB=[],mB=[],sel=-1;
+  P.forEach(function(p,i){var li=document.createElement('li'),b=document.createElement('button');b.type='button';b.innerHTML='<b>P'+(i+1)+'</b><span></span>';b.querySelector('span').textContent=p[0];b.addEventListener('click',function(){pick(sel===i?-1:i);});li.appendChild(b);pc.appendChild(li);pB.push(b);});
+  M.forEach(function(m,i){var li=document.createElement('li'),b=document.createElement('button');b.type='button';b.tabIndex=-1;b.innerHTML='<b>M'+(i+1)+'</b><span></span>';b.querySelector('span').textContent=m.t;li.appendChild(b);mc.appendChild(li);mB.push(b);});
+  function draw(){
+    while(wires.firstChild)wires.removeChild(wires.firstChild);
+    if(getComputedStyle(wires).display==='none')return;
+    var R=br.getBoundingClientRect();
+    MAP.forEach(function(ms,i){ms.forEach(function(j){
+      var a=pB[i].getBoundingClientRect(),b=mB[j].getBoundingClientRect();
+      var x1=a.right-R.left,y1=a.top+a.height/2-R.top,x2=b.left-R.left,y2=b.top+b.height/2-R.top,mx=(x1+x2)/2;
+      var p=el('path',{d:'M'+x1+' '+y1+' C '+mx+' '+y1+', '+mx+' '+y2+', '+x2+' '+y2},wires);
+      if(i===sel)p.classList.add('on');
+    });});
+  }
+  function pick(i){
+    sel=i;br.classList.toggle('sel',i>=0);
+    pB.forEach(function(b,k){b.classList.toggle('on',k===i);b.setAttribute('aria-pressed',k===i?'true':'false');});
+    mB.forEach(function(b,k){b.classList.toggle('on',i>=0&&MAP[i].indexOf(k)>=0);});
+    if(i<0){bex.textContent='Selecciona un principio para ver qué métodos lo aplican y un ejemplo.';}
+    else{bex.innerHTML='<b></b> ';bex.querySelector('b').textContent='Ejemplo:';bex.appendChild(document.createTextNode(EX[i]));}
+    draw();
+  }
+  window.addEventListener('resize',function(){requestAnimationFrame(draw);});
+
+  /* tarjetas neuromitos */
+  [].forEach.call(document.querySelectorAll('.flip'),function(f){f.addEventListener('click',function(){var on=f.classList.toggle('flipped');f.setAttribute('aria-pressed',on?'true':'false');});});
+
+  /* nombres del equipo (solo en este navegador) */
+  [].forEach.call(document.querySelectorAll('[data-key]'),function(p){
+    try{var v=localStorage.getItem('np-team-'+p.getAttribute('data-key'));if(v)p.textContent=v;}catch(e){}
+    p.addEventListener('input',function(){try{localStorage.setItem('np-team-'+p.getAttribute('data-key'),p.textContent.trim());}catch(e){}});
+    p.addEventListener('keydown',function(e){e.stopPropagation();if(e.key==='Enter'){e.preventDefault();p.blur();}});
+  });
+
+  /* ---- Navegación ---- */
+  var dots=document.getElementById('dots'),counter=document.getElementById('counter'),prog=document.getElementById('progress'),cur=0,dotB=[];
+  slides.forEach(function(s,i){var b=document.createElement('button');b.type='button';b.setAttribute('aria-label',(i+1)+'. '+s.getAttribute('data-title'));b.innerHTML='<span></span>';b.querySelector('span').textContent=s.getAttribute('data-title');b.addEventListener('click',function(){go(i);});dots.appendChild(b);dotB.push(b);});
+  function pad(n){return (n<10?'0':'')+n;}
+  function setCur(i){
+    cur=i;dotB.forEach(function(b,k){b.setAttribute('aria-current',k===i?'true':'false');});
+    counter.textContent=pad(i+1)+' / '+pad(slides.length);
+    prog.style.width=((i+1)/slides.length*100)+'%';
+    if(slides[i].getAttribute('data-title')==='Principios y métodos')requestAnimationFrame(function(){setTimeout(draw,900);});
+  }
+  function go(i){i=Math.max(0,Math.min(slides.length-1,i));slides[i].scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'});}
+  document.getElementById('prev').addEventListener('click',function(){go(cur-1);});
+  document.getElementById('next').addEventListener('click',function(){go(cur+1);});
+  document.getElementById('fs').addEventListener('click',function(){try{if(document.fullscreenElement){document.exitFullscreen();}else{var r=document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen();if(r&&r.catch)r.catch(function(){});}}catch(e){}});
+  document.addEventListener('keydown',function(e){
+    var t=e.target;if(t&&(t.isContentEditable||t.getAttribute&&t.getAttribute('role')==='tab'))return;
+    if(['ArrowDown','PageDown'].indexOf(e.key)>=0||(e.key===' '&&!(t&&t.tagName==='BUTTON'))){e.preventDefault();go(cur+1);}
+    else if(['ArrowUp','PageUp'].indexOf(e.key)>=0){e.preventDefault();go(cur-1);}
+    else if(e.key==='Home'){e.preventDefault();go(0);}
+    else if(e.key==='End'){e.preventDefault();go(slides.length-1);}
+  });
+
+  /* entrada / salida de elementos */
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        var i=slides.indexOf(en.target);
+        if(en.isIntersecting&&en.intersectionRatio>=0.45){en.target.classList.add('is-in');setCur(i);}
+        else if(en.intersectionRatio<0.2){en.target.classList.remove('is-in');}
+      });
+    },{root:deck,threshold:[0,0.2,0.45,0.7]});
+    slides.forEach(function(s){io.observe(s);});
+  } else { slides.forEach(function(s){s.classList.add('is-in');}); }
+  setCur(0);
+
+  /* parallax */
+  var layers=slides.map(function(s){return [].slice.call(s.querySelectorAll('[data-speed]'));});
+  var ticking=false;
+  /* desplazamiento con el mouse: objetivo (tx,ty) y posición suavizada (mx,my), de -1 a 1 */
+  var tx=0,ty=0,mx=0,my=0,easing=false;
+  var finePointer=window.matchMedia&&window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  function para(){
+    ticking=false;if(reduce)return;
+    var st=deck.scrollTop,vh=deck.clientHeight;
+    slides.forEach(function(s,i){
+      var off=s.offsetTop-st;if(off>vh*1.2||off<-s.offsetHeight*1.2)return;
+      layers[i].forEach(function(l){
+        var sp=+l.getAttribute('data-speed'),k=sp*150;
+        l.style.transform='translate3d('+(-mx*k).toFixed(1)+'px,'+(off*sp-my*k).toFixed(1)+'px,0)';
+      });
+    });
+  }
+  function ease(){
+    mx+=(tx-mx)*0.08;my+=(ty-my)*0.08;
+    para();
+    if(Math.abs(tx-mx)>0.001||Math.abs(ty-my)>0.001){requestAnimationFrame(ease);}else{easing=false;}
+  }
+  function kick(){if(!easing&&!reduce){easing=true;requestAnimationFrame(ease);}}
+  if(finePointer){
+    window.addEventListener('mousemove',function(e){tx=e.clientX/window.innerWidth*2-1;ty=e.clientY/window.innerHeight*2-1;kick();},{passive:true});
+    document.addEventListener('mouseleave',function(){tx=0;ty=0;kick();});
+  }
+  deck.addEventListener('scroll',function(){if(!ticking){ticking=true;requestAnimationFrame(para);}var h=document.getElementById('hint');if(h&&deck.scrollTop>40)h.classList.add('gone');},{passive:true});
+  para();
+  deck.focus({preventScroll:true});
+})();
+</script>
+</body>
+</html>
