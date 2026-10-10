@@ -59,6 +59,7 @@ mark{background:linear-gradient(transparent 58%, rgba(255,210,95,.75) 58%);color
 .dark .orb.b,.deep .orb.b{background:radial-gradient(circle, rgba(255,210,95,.32), rgba(255,210,95,0) 68%)}
 .light .orb.a{background:radial-gradient(circle, rgba(51,102,204,.16), rgba(51,102,204,0) 70%)}
 .light .orb.b{background:radial-gradient(circle, rgba(255,210,95,.45), rgba(255,210,95,0) 68%)}
+.orb.c{background:radial-gradient(circle, rgba(51,102,204,.5), rgba(51,102,204,0) 68%)}
 .gold .orb.a{background:radial-gradient(circle, rgba(255,255,255,.5), rgba(255,255,255,0) 70%)}
 .gold .orb.b{background:radial-gradient(circle, rgba(0,70,105,.18), rgba(0,70,105,0) 68%)}
 .net{width:100%;height:100%}
@@ -294,6 +295,7 @@ mark{background:linear-gradient(transparent 58%, rgba(255,210,95,.75) 58%);color
 .anim .slide .orb{transition:opacity 1.4s ease, scale 1.8s cubic-bezier(.2,.7,.2,1)}
 .anim .slide:not(.is-in) .orb{opacity:0;scale:.35;transition-duration:.5s,.5s}
 .anim .slide .orb.b{transition-delay:.25s}
+.anim .slide .orb.c{transition-delay:.45s}
 .anim .slide .net line{stroke-dasharray:1;stroke-dashoffset:0;transition:stroke-dashoffset 1.6s cubic-bezier(.3,.6,.2,1);transition-delay:calc(var(--i,0) * 35ms + .2s)}
 .anim .slide:not(.is-in) .net line{stroke-dashoffset:1;transition-duration:.4s;transition-delay:0s}
 .anim .slide .net circle{transform-box:fill-box;transform-origin:center;transition:scale .6s cubic-bezier(.3,1.6,.4,1), opacity .6s;transition-delay:calc(var(--i,0) * 40ms + .5s)}
@@ -316,6 +318,7 @@ mark{background:linear-gradient(transparent 58%, rgba(255,210,95,.75) 58%);color
 .orb{transform-origin:50% -80%}
 .orb.a{--sw:4deg;--dur:9s}
 .orb.b{--sw:6deg;--dur:7s;--dl:-3s;transform-origin:50% -120%}
+.orb.c{--sw:5deg;--dur:8.5s;--dl:-6s;transform-origin:50% -100%}
 .net{--sw:1.2deg;--dur:12s;--dl:-5s;transform-origin:50% 0}
 .bignum{--sw:3deg;--dur:8s;--dl:-2s;transform-origin:50% -150%}
 .grid-dots{--sw:.6deg;--dur:14s;transform-origin:50% 0}
@@ -353,6 +356,24 @@ mark{background:linear-gradient(transparent 58%, rgba(255,210,95,.75) 58%);color
 .cnode:hover text{fill:#0b2433}
 .ccore:hover circle{stroke:#FFD25F;stroke-width:3}
 @media (prefers-reduced-motion: reduce){.hov,.cnode,.ccore{translate:none!important;scale:none!important}}
+
+
+/* ---------- Hover adicionales ---------- */
+.venn .vc{transform-box:fill-box;transform-origin:center;transition:scale .4s cubic-bezier(.2,.7,.2,1), fill-opacity .3s, stroke-width .3s;cursor:default}
+.venn .vc:hover{scale:1.07;fill-opacity:.8;stroke-width:3}
+.venn text{pointer-events:none}
+.flip .face{transition:background-color .3s, border-color .3s, box-shadow .3s}
+.flip:hover{translate:0 -8px}
+.flip:hover .face.front{background-color:rgba(255,255,255,.12);border-style:solid;border-color:var(--gold);box-shadow:0 18px 34px rgba(0,0,0,.3)}
+.flip:hover .face.back{box-shadow:0 18px 34px rgba(0,0,0,.3)}
+.week .bar{transition:translate .35s cubic-bezier(.2,.7,.2,1), box-shadow .35s, scale .35s}
+.week .row:hover .bar{translate:8px 0;scale:1.02;box-shadow:0 10px 22px rgba(0,42,64,.22)}
+.week .day{transition:color .3s}
+.week .row:hover .day{color:var(--blue)}
+.mpanel p{font-size:1.1rem}
+.mpanel h4{font-size:.85rem}
+.mpanel .ex span{font-size:.95rem;padding:7px 12px}
+.mpanel > .eyebrow{font-size:.88rem}
 
 /* ---------- Responsive ---------- */
 @media (max-width: 1000px){
@@ -430,7 +451,7 @@ mark{background:linear-gradient(transparent 58%, rgba(255,210,95,.75) 58%);color
 <section class="slide light" data-title="Ruta de la presentación">
   <div class="bg" aria-hidden="true">
     <div class="layer grid-dots" data-speed="0.12" style="color:var(--navy)"></div>
-    <div class="layer" data-speed="0.3"><div class="orb b" style="width:46vw;height:46vw;right:-12vw;top:5%"></div></div>
+    <div class="layer" data-speed="0.3"><div class="orb b" style="width:46vw;height:46vw;right:-12vw;top:5%"></div><div class="orb c" style="width:46vw;height:46vw;left:-14vw;bottom:6%"></div></div>
   </div>
   <div class="wrap">
     <p class="eyebrow" data-a="down">Ruta</p>
@@ -463,9 +484,9 @@ mark{background:linear-gradient(transparent 58%, rgba(255,210,95,.75) 58%);color
     </div>
     <div class="fig" data-a="zoom" style="--d:3">
       <svg class="venn" viewBox="0 0 440 400" role="img" aria-label="Diagrama de tres círculos: neurociencias, psicología cognitiva y pedagogía; en su intersección, la neuropedagogía">
-        <circle cx="160" cy="150" r="115" fill="#3366CC" fill-opacity=".55" stroke="#9ec0ff" stroke-width="1.5"/>
-        <circle cx="280" cy="150" r="115" fill="#9ec0ff" fill-opacity=".35" stroke="#9ec0ff" stroke-width="1.5"/>
-        <circle cx="220" cy="250" r="115" fill="#FFD25F" fill-opacity=".35" stroke="#FFD25F" stroke-width="1.5"/>
+        <circle class="vc" cx="160" cy="150" r="115" fill="#3366CC" fill-opacity=".55" stroke="#9ec0ff" stroke-width="1.5"/>
+        <circle class="vc" cx="280" cy="150" r="115" fill="#9ec0ff" fill-opacity=".35" stroke="#9ec0ff" stroke-width="1.5"/>
+        <circle class="vc" cx="220" cy="250" r="115" fill="#FFD25F" fill-opacity=".35" stroke="#FFD25F" stroke-width="1.5"/>
         <text x="112" y="104" text-anchor="middle" fill="#fff" font-size="14">Neuro-</text>
         <text x="112" y="121" text-anchor="middle" fill="#fff" font-size="14">ciencias</text>
         <text x="328" y="104" text-anchor="middle" fill="#fff" font-size="14">Psicología</text>
@@ -483,7 +504,7 @@ mark{background:linear-gradient(transparent 58%, rgba(255,210,95,.75) 58%);color
 <section class="slide light" data-title="Aprendizaje autónomo">
   <div class="bg" aria-hidden="true">
     <div class="layer" data-speed="0.12"><svg class="net" data-net="30" data-seed="21" preserveAspectRatio="xMidYMid slice"></svg></div>
-    <div class="layer" data-speed="0.3"><div class="orb a" style="width:50vw;height:50vw;left:-18vw;top:30%"></div></div>
+    <div class="layer" data-speed="0.3"><div class="orb c" style="width:46vw;height:46vw;right:-12vw;top:5%"></div><div class="orb b" style="width:46vw;height:46vw;left:-14vw;bottom:6%"></div></div>
   </div>
   <div class="wrap two">
     <div class="fig" data-a="zoom" style="--d:2"><svg id="knowles" viewBox="0 0 460 460" role="img" aria-label="Ciclo del aprendizaje autónomo según Knowles: diagnosticar necesidades, formular metas, identificar recursos, elegir estrategias y evaluar resultados"></svg></div>
@@ -500,7 +521,7 @@ mark{background:linear-gradient(transparent 58%, rgba(255,210,95,.75) 58%);color
 <section class="slide light" data-title="Mapa conceptual">
   <div class="bg" aria-hidden="true">
     <div class="layer grid-dots" data-speed="0.1" style="color:var(--blue)"></div>
-    <div class="layer" data-speed="0.3"><div class="orb b" style="width:36vw;height:36vw;left:-10vw;top:0"></div></div>
+    <div class="layer" data-speed="0.3"><div class="orb b" style="width:36vw;height:36vw;left:-10vw;top:0"></div><div class="orb c" style="width:46vw;height:46vw;right:-14vw;bottom:6%"></div></div>
   </div>
   <div class="wrap">
     <p class="eyebrow" data-a="down">Mapa conceptual</p>
@@ -559,15 +580,15 @@ mark{background:linear-gradient(transparent 58%, rgba(255,210,95,.75) 58%);color
     <h2 data-a="up" style="--d:1">¿Mito o evidencia?</h2>
     <p class="lead" data-a="up" style="--d:2">Los neuromitos son creencias erróneas sobre el cerebro muy difundidas en educación <span class="cite">(Howard-Jones, 2014; Pallarés-Domínguez, 2021)</span>. Toca cada tarjeta para ver qué dice la evidencia.</p>
     <div class="flips">
-      <button class="flip" type="button" data-a="up" style="--d:3" aria-pressed="false"><div class="inner">
+      <button class="flip hov" type="button" data-a="up" style="--d:3" aria-pressed="false"><div class="inner">
         <div class="face front"><span class="tag">¿Verdadero?</span><h3>«Solo usamos el 10 % de nuestro cerebro.»</h3><span class="turn">Toca para girar ↻</span></div>
         <div class="face back"><span class="tag">Mito</span><h3>Usamos todo el cerebro</h3><p>Las distintas regiones se activan según la tarea; no existe una parte «dormida» esperando ser despertada.</p></div>
       </div></button>
-      <button class="flip" type="button" data-a="up" style="--d:4" aria-pressed="false"><div class="inner">
+      <button class="flip hov" type="button" data-a="up" style="--d:4" aria-pressed="false"><div class="inner">
         <div class="face front"><span class="tag">¿Verdadero?</span><h3>«Se aprende mejor si se enseña según el estilo visual, auditivo o kinestésico.»</h3><span class="turn">Toca para girar ↻</span></div>
         <div class="face back"><span class="tag">Mito</span><h3>No hay evidencia</h3><p>Adaptar la enseñanza a un «estilo» no mejora el aprendizaje. Lo que funciona es combinar formatos y practicar activamente.</p></div>
       </div></button>
-      <button class="flip" type="button" data-a="up" style="--d:5" aria-pressed="false"><div class="inner">
+      <button class="flip hov" type="button" data-a="up" style="--d:5" aria-pressed="false"><div class="inner">
         <div class="face front"><span class="tag">¿Verdadero?</span><h3>«Hay personas de hemisferio izquierdo (lógicas) y de hemisferio derecho (creativas).»</h3><span class="turn">Toca para girar ↻</span></div>
         <div class="face back"><span class="tag">Mito</span><h3>Los hemisferios trabajan juntos</h3><p>Ambos hemisferios están conectados y participan en casi todas las tareas, incluidas la lógica y la creatividad.</p></div>
       </div></button>
@@ -634,7 +655,7 @@ mark{background:linear-gradient(transparent 58%, rgba(255,210,95,.75) 58%);color
 <section class="slide light" data-title="Principios y métodos">
   <div class="bg" aria-hidden="true">
     <div class="layer grid-dots" data-speed="0.1" style="color:var(--navy)"></div>
-    <div class="layer" data-speed="0.3"><div class="orb a" style="width:50vw;height:50vw;left:-15vw;top:20%"></div></div>
+    <div class="layer" data-speed="0.3"><div class="orb a" style="width:50vw;height:50vw;left:-15vw;top:20%"></div><div class="orb c" style="width:46vw;height:46vw;right:-16vw;top:27%"></div></div>
   </div>
   <div class="wrap">
     <p class="eyebrow" data-a="down">Del porqué al cómo</p>
@@ -664,13 +685,13 @@ mark{background:linear-gradient(transparent 58%, rgba(255,210,95,.75) 58%);color
       </div>
       <div style="display:grid;gap:14px">
         <div class="week">
-          <div class="row" data-a="right" style="--d:2"><span class="day">Lunes</span><div class="bar k">Estudio del tema · 2 bloques de 25 min sin celular</div></div>
-          <div class="row" data-a="right" style="--d:3"><span class="day">Martes</span><div class="bar r">Repaso 1 · autoevaluación con preguntas</div></div>
-          <div class="row" data-a="right" style="--d:4"><span class="day">Miércoles</span><div class="bar">Problema o caso real (ABP) · aplicar lo aprendido</div></div>
-          <div class="row" data-a="right" style="--d:5"><span class="day">Jueves</span><div class="bar">Foro: explicar el tema a los compañeros</div></div>
-          <div class="row" data-a="right" style="--d:6"><span class="day">Viernes</span><div class="bar">Cuestionario con IA · revisar errores</div></div>
-          <div class="row" data-a="right" style="--d:7"><span class="day">Domingo</span><div class="bar r">Repaso 2 · diario: ¿qué sé?, ¿qué me falta?</div></div>
-          <div class="row" data-a="right" style="--d:8"><span class="day">Cada noche</span><div class="bar">Dormir bien · la consolidación ocurre en parte durante el sueño</div></div>
+          <div class="row hov" data-a="right" style="--d:2"><span class="day">Lunes</span><div class="bar k">Estudio del tema · 2 bloques de 25 min sin celular</div></div>
+          <div class="row hov" data-a="right" style="--d:3"><span class="day">Martes</span><div class="bar r">Repaso 1 · autoevaluación con preguntas</div></div>
+          <div class="row hov" data-a="right" style="--d:4"><span class="day">Miércoles</span><div class="bar">Problema o caso real (ABP) · aplicar lo aprendido</div></div>
+          <div class="row hov" data-a="right" style="--d:5"><span class="day">Jueves</span><div class="bar">Foro: explicar el tema a los compañeros</div></div>
+          <div class="row hov" data-a="right" style="--d:6"><span class="day">Viernes</span><div class="bar">Cuestionario con IA · revisar errores</div></div>
+          <div class="row hov" data-a="right" style="--d:7"><span class="day">Domingo</span><div class="bar r">Repaso 2 · diario: ¿qué sé?, ¿qué me falta?</div></div>
+          <div class="row hov" data-a="right" style="--d:8"><span class="day">Cada noche</span><div class="bar">Dormir bien · la consolidación ocurre en parte durante el sueño</div></div>
         </div>
         <div class="legend" data-a="fade" style="--d:8"><span><i style="background:var(--navy)"></i>Estudio nuevo</span><span><i style="background:var(--blue)"></i>Repaso espaciado</span><span><i style="background:#fff;border:1px solid rgba(0,70,105,.3)"></i>Aplicación y metacognición</span></div>
       </div>
@@ -738,7 +759,7 @@ mark{background:linear-gradient(transparent 58%, rgba(255,210,95,.75) 58%);color
       <div><p>Alberto Jose Garcia Stave</p></div>
       <div><p>Gloria Angelica Luquez Rodriguez</p></div>
     </div>
-    <p class="eyebrow" data-a="down" style="--d:2">Bibliografía</p>
+    <p class="eyebrow" data-a="down" style="--d:2">Referencias · APA 7</p>
     <div class="refs" data-a="up" style="--d:3">
       <p>Aparicio-Gómez, O.-Y., Ostos-Ortiz, O.-L., &amp; Abadía-García, C. (2025). Inteligencia artificial y aprendizaje personalizado en el siglo XXI. <i>Revista Interamericana de Investigación, Educación y Pedagogía RIIEP, 18</i>(2), 87-100. https://revistas.usantotomas.edu.co/index.php/riiep/article/view/11122</p>
       <p>Araya-Pizarro, S. C., &amp; Espinoza Pastén, L. (2020). Aportes desde las neurociencias para la comprensión de los procesos de aprendizaje en los contextos educativos. <i>Propósitos y Representaciones, 8</i>(1), e312. https://doi.org/10.20511/pyr2020.v8n1.312</p>
